@@ -11,5 +11,6 @@ the creation of Complex Components.
 
 Viewing of the information can be unrestricted.
 
-Integration with LDAP (for accounts and permissions) is highly desirable.
+Integration with LDAP (for accounts and permissions)
+will provide everything that is needed.
 
