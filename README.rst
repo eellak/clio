@@ -1,11 +1,13 @@
 Clio
 ====
 
-.. image:: https://img.shields.io/badge/license-GPL--3.0--or--later-orange.svg
+|license| |language| |reuse|
+
+.. |license| image:: https://img.shields.io/badge/license-GPL--3.0--or--later-orange.svg
         :alt: GPL-3.0-or-later
-.. image:: https://img.shields.io/badge/python-3.x-green.svg
+.. |language| image:: https://img.shields.io/badge/python-3.x-green.svg
         :alt: Python 3.x
-.. image:: https://reuse.software/badge/reuse-compliant.svg
+.. |reuse| image:: https://reuse.software/badge/reuse-compliant.svg
         :alt: REUSE compatible
 
 
@@ -62,5 +64,5 @@ on the issues_ and `pull requests`_.
 .. _pull requests: https://github.com/eellak/clio/pulls
 
 For more real-time collaboration, we use a dedicated zulip at
-http://clio,zulipchat.com.
+http://clio.zulipchat.com.
 
