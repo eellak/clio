@@ -1,9 +1,12 @@
 Clio
 ====
 
-.. image:: https://img.shields.io/badge/license-GPL--3.0--or--later-orange.svg :alt: GPL-3.0-or-later
-.. image:: https://img.shields.io/badge/python-3.x-green.svg :alt: Python 3.x
-.. image:: https://reuse.software/badge/reuse-compliant.svg :alt: REUSE compatible
+.. image:: https://img.shields.io/badge/license-GPL--3.0--or--later-orange.svg
+        :alt: GPL-3.0-or-later
+.. image:: https://img.shields.io/badge/python-3.x-green.svg
+        :alt: Python 3.x
+.. image:: https://reuse.software/badge/reuse-compliant.svg
+        :alt: REUSE compatible
 
 
 This is Clio, a web-based system
