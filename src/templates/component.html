@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/table.css">
+    <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+	$("#li-component").addClass("active")
+        $("#component").DataTable();
+    } );
+    </script>
+
+    <table id="component" class="display" style="width:100%">
+	<thead>
+	    <tr>
+		<th>Name</th>
+		<th>Version</th>
+		<th>Publication Date</th>
+		<th>Origin</th>
+		<th>Source URL</th>
+		<th>External Link</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for component in components%}
+	    <tr>
+		<th> {{ component.name }} </th>
+		<th> {{ component.version }} </th>
+		<th> {{ component.pub_date }} </th>
+		<th> {{ component.origin }} </th>
+		<th> {{ component.source_url }} </th>
+		<th> {{ component.ext_link }} </th>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+</div>
+{% endblock %}
