@@ -27,12 +27,12 @@
 	<tbody>
 	    {% for product in products%}
 	    <tr>
-		<th> {{ product.name }} </th>
-		<th> {{ product.version }} </th>
-		<th> {{ product.license.full_name }} </th>
-		<th> {{ product.owner }} </th>
-		<th> {{ product.owner }} </th>
-		<th> {{ product.approval_date }} </th>
+		<td><a href={{ url_for('product_info', id=product.id) }}> {{ product.name }} </a></td>
+		<td> {{ product.version }} </td>
+		<td> {{ product.license.full_name }} </td>
+		<td> {{ product.owner }} </td>
+		<td> {{ product.owner }} </td>
+		<td> {{ product.approval_date }} </td>
 	    </tr>
 	    {% endfor %}
 	</tbody>

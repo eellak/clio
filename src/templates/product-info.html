@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-dark"> {{ product.name }} </h2>
+    <h5 class="text-info">Name</h5>
+    <p class="text-secondary"> {{ product.name }} </p>
+    <h5 class="text-info">Version</h5>
+    <p class="text-secondary"> {{ product.version }} </p>
+    <h5 class="text-info">Out-Bound License (OBL)</h5>
+    {% if product.license %}
+        <p class="text-secondary"><a href={{ url_for('license_info', id=product.license.id) }}> {{ product.license.full_name }} </a></p>
+    {% else %}
+	<p class=}text-secondary"><a href='#'> None </a></p>
+    {% endif %}
+    <h5 class="text-info">Owner</h5>
+    <p class="text-secondary"> {{ product.owner }} </p>
+    <h5 class="text-info">Approver</h5>
+    <p class="text-secondary"> {{ product.approver }} </p>
+    <h5 class="text-info">Approval Date</h5>
+    <p class="text-secondary"> {{ product.approval_date }} </p>
+    <h5 class="text-info">Associated Components</h5>
+    {% if product.components %}
+        <ul>
+	{% for products in product.components %}
+	    <li><p class="text-secondary"> {{ products.relation }} <a href={{ url_for('component_info', id=products.component.id) }}> {{ products.component.name }} </a>, Modified : {{ products.modification }}, Delivery : {{ products.delivery }}</p></li>
+	{% endfor %}
+	</ul>
+    {% else %}
+	<p class="text-secondary">None</p>
+    {% endif %}
+</div>
+{% endblock %}

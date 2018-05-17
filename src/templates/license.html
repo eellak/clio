@@ -8,11 +8,10 @@
     <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function() {
-	$("#li-license").addClass("active")
+        $("#li-license").addClass("active")
 	$("#license").DataTable();
     } );
     </script>
-
     <table id="license" class="display" style="width:100%">
 	<thead>
 	    <tr>
@@ -26,11 +25,11 @@
 	<tbody>
 	    {% for license in licenses %}
 	    <tr>
-		<th> {{ license.full_name }} </th>
-		<th> {{ license.identifier }} </th>
-		<th> {{ license.fsf_free_libre }} </th>
-		<th> {{ license.osi_approved }} </th>
-		<th> {{ license.license_category }} </th>
+		<td><a href={{ url_for('license_info', id=license.id) }} > {{ license.full_name }} </a></td>
+		<td> {{ license.identifier }} </td>
+		<td> {{ license.fsf_free_libre }} </td>
+		<td> {{ license.osi_approved }} </td>
+		<td> {{ license.license_category }} </td>
 	    </tr>
 	    {% endfor %}
 	</tbody>

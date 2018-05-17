@@ -37,6 +37,24 @@ def product():
     return render_template('product.html', products=products)
 
 
+@app.route('/license/<int:id>')
+def license_info(id):
+    license = License.query.filter_by(id=id).first()
+    return render_template('license-info.html', license=license)
+
+
+@app.route('/component/<int:id>')
+def component_info(id):
+    component = Component.query.filter_by(id=id).first()
+    return render_template('component-info.html', component=component)
+
+
+@app.route('/product/<int:id>')
+def product_info(id):
+    product = Product.query.filter_by(id=id).first()
+    return render_template('product-info.html', product=product)
+
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
@@ -49,4 +67,4 @@ def internal_error(error):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')

@@ -85,10 +85,6 @@ class Component(db.Model):
     # External Links
     ext_link = db.Column(db.String(128))
 
-    # Created on
-    created_on = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                           nullable=False)
-
     # Licenses
     licenses = db.relationship("License", secondary="licenses",
                                backref=db.backref("component", lazy="dynamic"),
