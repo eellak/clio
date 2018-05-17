@@ -141,14 +141,14 @@ class License(db.Model):
                               backref='license', lazy='dynamic')
 
     def __init__(self, full_name, identifier, fsf_free_libre=None,
-                 osi_approved=None, license_category=None, license_text_path=None):
+                 osi_approved=None, license_category=None, license_text=None):
 
         self.full_name = full_name
         self.identifier = identifier
         self.fsf_free_libre = fsf_free_libre
         self.osi_approved = osi_approved
         self.license_category = license_category
-        self.license_text_path = license_text_path
+        self.license_text = license_text
 
 
 class Product(db.Model):
