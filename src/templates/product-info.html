@@ -21,10 +21,10 @@
     <h5 class="text-info">Approval Date</h5>
     <p class="text-secondary"> {{ product.approval_date }} </p>
     <h5 class="text-info">Associated Components</h5>
-    {% if product.components %}
+    {% if product.component_conn %}
         <ul>
-	{% for products in product.components %}
-	    <li><p class="text-secondary"> {{ products.relation }} <a href={{ url_for('component_info', id=products.component.id) }}> {{ products.component.name }} </a>, Modified : {{ products.modification }}, Delivery : {{ products.delivery }}</p></li>
+	{% for conn in product.component_conn %}
+	    <li><p class="text-secondary"> {{ conn.relation }} <a href={{ url_for('component_info', id=conn.component.id) }}> {{ conn.component.name }}</a>, Modified : {{ conn.modification }}, Delivery : {{ conn.delivery }}</p></li>
 	{% endfor %}
 	</ul>
     {% else %}

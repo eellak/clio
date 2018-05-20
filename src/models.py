@@ -1,23 +1,26 @@
 from app import db
 from sqlalchemy.ext.associationproxy import association_proxy
 
-licenses = db.Table("licenses",
-                    db.Column("component_id", db.Integer,
-                              db.ForeignKey("component.id")),
-                    db.Column("license_id", db.Integer,
-                              db.ForeignKey("license.id"))
-                    )
+# Middle table that connects component and license
+component_license_conn = db.Table("component_license_conn",
+                                  db.Column("component_id", db.Integer,
+                                            db.ForeignKey("component.id")),
+                                  db.Column("license_id", db.Integer,
+                                            db.ForeignKey("license.id"))
+                                  )
 
-components = db.Table("components",
-                      db.Column("parent_id", db.Integer,
-                                db.ForeignKey("component.id")),
-                      db.Column("child_id", db.Integer,
-                                db.ForeignKey("component.id"))
-                      )
+# Middle table that connects two components
+component_conn = db.Table("component_conn",
+                          db.Column("parent_id", db.Integer,
+                                    db.ForeignKey("component.id")),
+                          db.Column("child_id", db.Integer,
+                                    db.ForeignKey("component.id"))
+                          )
 
 
-class Products(db.Model):
-    __tablename__ = "products"
+# Middle table that connects product and component
+class Product_Component_conn(db.Model):
+    __tablename__ = "product_component_conn"
 
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"),
                            primary_key=True)
@@ -34,9 +37,9 @@ class Products(db.Model):
     # Delivery
     delivery = db.Column(db.String(128))
 
-    product = db.relationship("Product", back_populates="components")
+    product = db.relationship("Product", back_populates="component_conn")
 
-    component = db.relationship("Component", back_populates="products")
+    component = db.relationship("Component", back_populates="product_conn")
 
     def __init__(self, product=None, component=None, relation=None,
                  modification=None, delivery=None):
@@ -86,21 +89,22 @@ class Component(db.Model):
     ext_link = db.Column(db.String(128))
 
     # Licenses
-    licenses = db.relationship("License", secondary="licenses",
+    licenses = db.relationship("License", secondary="component_license_conn",
                                backref=db.backref("component", lazy="dynamic"),
                                lazy="dynamic"
                                )
 
     # Components
-    components = db.relationship("Component", secondary="components",
-                                 primaryjoin=id == components.c.parent_id,
-                                 secondaryjoin=id == components.c.child_id,
+    components = db.relationship("Component", secondary="component_conn",
+                                 primaryjoin=id == component_conn.c.parent_id,
+                                 secondaryjoin=id == component_conn.c.child_id,
                                  backref=db.backref("component",
                                                     lazy="dynamic"),
                                  lazy="dynamic"
                                  )
 
-    products = db.relationship("Products", back_populates="component")
+    product_conn = db.relationship(
+        "Product_Component_conn", back_populates="component")
 
     def __init__(self, name, version, pub_date=None, origin=None, source_url=None, ext_link=None):
 
@@ -176,7 +180,8 @@ class Product(db.Model):
     # Approval Date
     approval_date = db.Column(db.DateTime)
 
-    components = db.relationship("Products", back_populates="product")
+    component_conn = db.relationship(
+        "Product_Component_conn", back_populates="product")
 
     def __init__(self, name, version, owner=None, approver=None, approval_date=None):
         self.name = name
