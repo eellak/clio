@@ -30,9 +30,9 @@
 		<td><a href={{ url_for('component_info', id=component.id) }}> {{ component.name }} </a></td>
 		<td> {{ component.version }} </td>
 		<td> {{ component.pub_date }} </td>
-		<td><a href={{ 'https://' + component.origin or '#' }}> {{ component.origin }} </a></td>
-		<td><a href={{ 'https://' + component.source_url or '#' }}> {{ component.source_url }} </a></td>
-		<td><a href={{ 'https://' + component.ext_link or '#' }}> {{ component.ext_link }} </a></td>
+		<td><a href={{ component.origin or '#' }}> {{ component.origin }} </a></td>
+		<td><a href={{ component.source_url or '#' }}> {{ component.source_url }} </a></td>
+		<td><a href={{ component.ext_link or '#' }}> {{ component.ext_link }} </a></td>
 	    </tr>
 	    {% endfor %}
 	</tbody>

@@ -15,9 +15,9 @@
     <h5 class="text-info">Publication Date</h5>
     <p class="text-secondary"> {{ component.pub_date }} </p>
     <h5 class="text-info">Origin</h5>
-    <p class="text-secondary"> <a href={{ 'https://' + component.origin or '#' }}>{{ component.origin }} </a></p>
+    <p class="text-secondary"> <a href={{ component.origin or '#' }}>{{ component.origin }} </a></p>
     <h5 class="text-info">Source URL</h5>
-    <p class="text-secondary"><a href={{ 'https://' + component.source_url  or '#' }}> {{ component.source_url }} </a></p>
+    <p class="text-secondary"><a href={{ component.source_url  or '#' }}> {{ component.source_url }} </a></p>
     <h5 class="text-info">Associated Components</h5>
     {% if component.components.count() > 0 %}
 	<ul>
