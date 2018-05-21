@@ -21,22 +21,14 @@
     <h5 class="text-info">Associated Components</h5>
     {% if component.components.count() > 0 %}
 	<ul>
-	{% for c in component.components %}
-	    <li><p class="text-secondary"><a href={{ url_for('component_info', id=c.id) }}> {{ c.name }} </a></p></li>
-	{% endfor %}
+	    {% for c in component.components %}
+		<li><p class="text-secondary"><a href={{ url_for('component_info', id=c.id) }}> {{ c.name }} </a></p></li>
+	    {% endfor %}
         </ul>
     {% else %}
         <p class="text-secondary">None</p>
     {% endif %}
-    <h5 class="text-info">Licenses</h5>
-    {% if component.licenses.count() > 0 %}
-        <ul>
-	{% for license in component.licenses %}
-	    <li><p class="text-secondary"><a href={{ url_for('license_info', id=license.id) }}> {{ license.full_name }} </a></p></li>
-	{% endfor %}
-	</ul>
-    {% else %}
-	<p class="text-secondary">None</p>
-    {% endif %}
+    <h5 class="text-info">License Expression</h5>
+    <p class="text-secondary"> {{ component.license_expression }} </p>
 </div>
 {% endblock %}

@@ -1,13 +1,6 @@
 from app import db
 from sqlalchemy.ext.associationproxy import association_proxy
 
-# Middle table that connects component and license
-component_license_conn = db.Table("component_license_conn",
-                                  db.Column("component_id", db.Integer,
-                                            db.ForeignKey("component.id")),
-                                  db.Column("license_id", db.Integer,
-                                            db.ForeignKey("license.id"))
-                                  )
 
 # Middle table that connects two components
 component_conn = db.Table("component_conn",
@@ -85,14 +78,11 @@ class Component(db.Model):
     # Content
     content = db.Column(db.String(128))
 
+    # License Expression
+    license_expression = db.Column(db.Text())
+
     # External Links
     ext_link = db.Column(db.String(128))
-
-    # Licenses
-    licenses = db.relationship("License", secondary="component_license_conn",
-                               backref=db.backref("component", lazy="dynamic"),
-                               lazy="dynamic"
-                               )
 
     # Components
     components = db.relationship("Component", secondary="component_conn",
@@ -106,13 +96,14 @@ class Component(db.Model):
     product_conn = db.relationship(
         "Product_Component_conn", back_populates="component")
 
-    def __init__(self, name, version, pub_date=None, origin=None, source_url=None, ext_link=None):
+    def __init__(self, name, version, pub_date=None, origin=None, source_url=None, license_expression=None, ext_link=None):
 
         self.name = name
         self.version = version
         self.pub_date = pub_date
         self.origin = origin
         self.source_url = source_url
+        self.license_expression = license_expression
         self.ext_link = ext_link
 
 
