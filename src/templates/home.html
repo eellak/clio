@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .navbar {
+	margin-bottom: 0 !important;
+    }
+</style>
 
 <div class="jumbotron">
-    <div class="container">
+    <div class="ui main container">
 	<h1>Clio</h1>
 	<p>Clio is a web based system for maintaining meta information on  software components</p>
 	<p><a class="btn btn-primary btn-lg" href="https://github.com/eellak/clio" role="button">Learn more &raquo;</a></p>
     </div>
 </div>
 
-<div class="container">
+<div class="ui main container">
     <div class="row">
 	<div class="col-md-4">
 	    <h2>License</h2>
@@ -28,8 +33,5 @@
 	    <p><a class="btn btn-default" href="/product" role="button">View details &raquo;</a></p>
 	</div>
     </div>
-
-    <hr>
-
 </div> 
 {% endblock %}

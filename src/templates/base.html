@@ -3,8 +3,10 @@
     <head>
 	<title>Clio</title>
 	<meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+        <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="/static/semantic.min.js"></script>
 	<link href="/static/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/sticky-footer-navbar.css" rel="stylesheet">
     </head>
     <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -27,11 +29,6 @@
 	    </div>
 	</nav>
 	{% block content %}{% endblock %}
-	<footer class="footer">
-	    <div class="container">
-		<span class="text-muted">&copy; 2018 Company, Inc.</span>
-	    </div>
-	</footer>
     </body>
 </html>
 
