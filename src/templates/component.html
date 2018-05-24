@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/table.css">
+    <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+	$("#li-component").addClass("active")
+        $("#component").DataTable();
+    } );
+    </script>
+
+    <table id="component" class="display" style="width:100%">
+	<thead>
+	    <tr>
+		<th>Name</th>
+		<th>Version</th>
+		<th>Publication Date</th>
+		<th>Origin</th>
+		<th>Source URL</th>
+		<th>External Link</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for component in components%}
+	    <tr>
+		<td><a href={{ url_for('component_info', id=component.id) }}> {{ component.name }} </a></td>
+		<td> {{ component.version }} </td>
+		<td> {{ component.pub_date }} </td>
+		<td><a href={{ component.origin or '#' }}> {{ component.origin }} </a></td>
+		<td><a href={{ component.source_url or '#' }}> {{ component.source_url }} </a></td>
+		<td><a href={{ component.ext_link or '#' }}> {{ component.ext_link }} </a></td>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+</div>
+{% endblock %}

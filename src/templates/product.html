@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/table.css">
+    <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+	$("#li-product").addClass("active")
+        $("#product").DataTable();
+    } );
+    </script>
+
+    <table id="product" class="display" style="width:100%">
+	<thead>
+	    <tr>
+		<th>Name</th>
+		<th>Version</th>
+		<th>License</th>
+		<th>Owner</th>
+		<th>Approver</th>
+		<th>Approver Date</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for product in products%}
+	    <tr>
+		<td><a href={{ url_for('product_info', id=product.id) }}> {{ product.name }} </a></td>
+		<td> {{ product.version }} </td>
+		<td> {{ product.license.full_name }} </td>
+		<td> {{ product.owner }} </td>
+		<td> {{ product.owner }} </td>
+		<td> {{ product.approval_date }} </td>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+</div>
+{% endblock %}

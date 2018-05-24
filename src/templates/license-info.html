@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-dark"> {{ license.full_name }} </h2>
+    <h5 class="text-info">Full Name</h5>
+    <p class="text-secondary"> {{ license.full_name }} </p>
+    <h5 class="text-info">Short identifier</h5>
+    <p class="text-secondary"> {{ license.identifier }} </p>
+    <h5 class="text-info">License Category</h5>
+    <p class="text-secondary"> {{ license.license_category }} </p>
+    <h5 class="text-info">Text</h5>
+    <p class="text-secondary"> {{ license.license_text }} </p>
+</div>
+{% endblock %}

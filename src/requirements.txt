@@ -1,0 +1,13 @@
+Werkzeug==0.14.1
+MarkupSafe==1.0
+Jinja2==2.10
+itsdangerous==0.24
+Flask==0.10.1
+SQLAlchemy==1.1.15
+Flask-SQLAlchemy==2.3.2
+Flask-Script==2.0.6
+Mako==1.0.7
+python-editor==1.0.3
+six==1.11.0
+python-dateutil==2.7.2
+alembic==0.9.9

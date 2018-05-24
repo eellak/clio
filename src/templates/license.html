@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/table.css">
+    <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#li-license").addClass("active")
+	$("#license").DataTable();
+    } );
+    </script>
+    <table id="license" class="display" style="width:100%">
+	<thead>
+	    <tr>
+		<th>Full name</th>
+		<th>Identifier</th>
+		<th>FSF Free/Libre?</th>
+		<th>OSI Approved?</th>
+		<th>License Category</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for license in licenses %}
+	    <tr>
+		<td><a href={{ url_for('license_info', id=license.id) }} > {{ license.full_name }} </a></td>
+		<td> {{ license.identifier }} </td>
+		<td> {{ license.fsf_free_libre }} </td>
+		<td> {{ license.osi_approved }} </td>
+		<td> {{ license.license_category }} </td>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+</div>
+{% endblock %}

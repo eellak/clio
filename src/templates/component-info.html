@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-dark"> {{ component.name }} </h2>
+    <h5 class="text-info">Name</h5>
+    <p class="text-secondary"> {{ component.name }} </p>
+    <h5 class="text-info">Version</h5>
+    <p class="text-secondary"> {{ component.version }} </p>
+    <h5 class="text-info">Created on</h5>
+    <p class="text-secondary"> {{ component.created_on }} </p>
+    <h5 class="text-info">Created by</h5>
+    <p class="text-secondary"> {{ component.created_by }} </p>
+    <h5 class="text-info">Publication Date</h5>
+    <p class="text-secondary"> {{ component.pub_date }} </p>
+    <h5 class="text-info">Origin</h5>
+    <p class="text-secondary"> <a href={{ component.origin or '#' }}>{{ component.origin }} </a></p>
+    <h5 class="text-info">Source URL</h5>
+    <p class="text-secondary"><a href={{ component.source_url  or '#' }}> {{ component.source_url }} </a></p>
+    <h5 class="text-info">Associated Components</h5>
+    {% if component.components.count() > 0 %}
+	<ul>
+	    {% for c in component.components %}
+		<li><p class="text-secondary"><a href={{ url_for('component_info', id=c.id) }}> {{ c.name }} </a></p></li>
+	    {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-secondary">None</p>
+    {% endif %}
+    <h5 class="text-info">License Expression</h5>
+    <p class="text-secondary"> {{ component.license_expression }} </p>
+</div>
+{% endblock %}
