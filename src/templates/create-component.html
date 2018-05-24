@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.js"></script>
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#pub_date').calendar({
+	type: 'date'
+    });
+    $('.ui.dropdown').dropdown({
+	onChange: function (value, text, $selectedItem) {
+	    console.log(value);
+	    console.log(typeof value)
+	},
+	forceSelection: false, 
+	selectOnKeydown: false, 
+	showOnFocus: false,
+	on: "hover" 
+    });
+});
+</script>
+
+<div class="container">
+    <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
+	<div class="fields">
+	    <div class="required field">
+		<label>Component Name</label>
+		<input type="text" name="name" placeholder="Name">
+	    </div>
+	    <div class="required field">
+		<label>Version</label>
+		<input type="text" name="version" placeholder="Version">
+	    </div>
+	</div>
+	<div class="fields">
+	    <div class="field">
+		<label>License Expression</label>
+		<input type="text" name="license_expression" placeholder="Expression">
+	    </div>
+	    <div class="field">
+		<label>Created By</label>
+		<input type="text" name="created_by" placeholder="By">
+	    </div>
+	</div>
+	<div class="fields">
+	    <div class="field">
+		<label>Origin Website</label>
+		<input type="text" name="origin" placeholder="Origin">
+	    </div>
+	    <div class="field">
+		<label>Source URL</label>
+		<input type="text" name="source_url" placeholder="Source">
+	    </div>
+	    <div class="field">
+		<label>External Link</label>
+		<input type="text" name="ext_link" placeholder="Link">
+	    </div>
+	</div>
+	<div class="ui calender" id="pub_date">
+	    <label>Publication Date</label>
+	    <div class="ui input left icon">
+		<i class="calendar icon"></i>
+		<input type="text" name="pub_date" placeholder="Date">
+	    </div>
+	</div>
+	<br />
+	<select name="components" class="ui fluid search dropdown" multiple="">
+	    <option value="">Component</option>
+	    {% for component in components %}
+		    <option value="{{ component.name }}">{{ component.name }}</option>
+	    {% endfor %}
+	</select>
+	<br />
+	<button class="ui primary button" type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

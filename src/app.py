@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 # Flask Initialization
 app = Flask(__name__)
@@ -53,6 +54,28 @@ def component_info(id):
 def product_info(id):
     product = Product.query.filter_by(id=id).first()
     return render_template('product-info.html', product=product)
+
+
+@app.route('/create/component', methods=['GET', 'POST'])
+def create_component():
+    if request.method == 'GET':
+        components = Component.query.all()
+    else:
+        name = request.form['name']
+        version = request.form['version']
+        license_expression = request.form['license_expression']
+        created_by = request.form['created_by']
+        origin = request.form['origin']
+        source_url = request.form['source_url']
+        ext_link = request.form['ext_link']
+        components = request.form.get('components', None)
+        pub_date = request.form['pub_date']
+        pub_date = datetime.strptime(pub_date, '%B %d, %Y')
+        pub_date = pub_date.strftime('%Y-%m-%d')
+        c = Component(name, version, pub_date=pub_date, origin=origin, source_url=source_url, license_expression=license_expression, ext_link=ext_link)
+        db.session.add(c)
+        db.session.commit()
+    return render_template('create-component.html', components=components)
 
 
 @app.errorhandler(404)
