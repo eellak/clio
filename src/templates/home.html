@@ -2,35 +2,55 @@
 
 {% block content %}
 <style>
-    .ui.segment.inverted {
-	margin-bottom: 0 !important;
-    }
+.ui.segment.inverted {
+    margin-bottom: 100px !important;
+}
+.ui.huge.primary.button {
+    margin-bottom: 100px !important;
+}
+h2 {
+    margin: 0 0 50px 0
+}
 </style>
-<div class="jumbotron">
-    <div class="ui main container">
-	<h1>Clio</h1>
-	<p>Clio is a web based system for maintaining meta information on  software components</p>
-	<p><a class="btn btn-primary btn-lg" href="https://github.com/eellak/clio" role="button">Learn more &raquo;</a></p>
+<div class="ui text container">
+    <h1 class="ui header">Clio</h1>
+    <h2>System for maintaining meta information on software components</h2>
+    <a class="ui huge primary button" href="https://github.com/eellak/clio">Learn more <i class="right arrow icon"></i></a>
+</div>
+<div class="ui container stackable grid">
+    <div class="three column row">
+	<div class="column">
+	    <h1 class="ui header">
+		License	
+	    </h1>
+	    <p>
+	    </p>
+	    <a class="ui small basic button" href="/license">
+		View details &raquo;
+	    </a>
+	</div>
+	<div class="column">
+	    <h1 class="ui header">
+		Component	
+	    </h1>
+	    <p>
+		A piece of software, usually a complete package which could either be simple or complex.
+	    </p>
+	    <a class="ui small basic button" href="/component">
+		View details &raquo;
+	    </a>
+	</div>
+	<div class="column">
+	    <h1 class="ui header">
+		Product	
+	    </h1>
+	    <p>
+	    </p>
+	    <a class="ui small basic button" href="/product">
+		View details &raquo;
+	    </a>
+	</div>
     </div>
 </div>
 
-<div class="ui main container">
-    <div class="row">
-	<div class="col-md-4">
-	    <h2>License</h2>
-	    <p></p>
-	    <p><a class="btn btn-default" href="/license" role="button">View details &raquo;</a></p>
-	</div>
-	<div class="col-md-4">
-	    <h2>Component</h2>
-	    <p>A piece of software, usually a complete package. It can be Simple or Complex</p>
-	    <p><a class="btn btn-default" href="/component" role="button">View details &raquo;</a></p>
-	</div>
-	<div class="col-md-4">
-	    <h2>Product</h2>
-	    <p></p>
-	    <p><a class="btn btn-default" href="/product" role="button">View details &raquo;</a></p>
-	</div>
-    </div>
-</div> 
 {% endblock %}

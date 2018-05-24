@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container">
+<div class="ui main container">
     <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
 	<div class="fields">
 	    <div class="required field">
@@ -62,18 +62,20 @@ $(document).ready(function() {
 		<input type="text" name="ext_link" placeholder="Link">
 	    </div>
 	</div>
-	<div class="ui calender" id="pub_date">
-	    <label>Publication Date</label>
-	    <div class="ui input left icon">
-		<i class="calendar icon"></i>
-		<input type="text" name="pub_date" placeholder="Date">
+	<div class="fields ui calender" id="pub_date">
+	    <div class="field">
+		<label>Publication Date</label>
+		<div class="ui input left icon">
+		    <i class="calendar icon"></i>
+		    <input type="text" name="pub_date" placeholder="Date">
+		</div>
 	    </div>
 	</div>
 	<br />
 	<select name="components" class="ui fluid search dropdown" multiple="">
 	    <option value="">Component</option>
 	    {% for component in components %}
-		    <option value="{{ component.name }}">{{ component.name }}</option>
+	    <option value="{{ component.name }}">{{ component.name }}</option>
 	    {% endfor %}
 	</select>
 	<br />
