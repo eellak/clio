@@ -1,5 +1,5 @@
-Zlib|1.2.6|Admin|May 25, 2018|http://www.zlib.net/|http://www.zlib.net/zlib-1.2.11.tar.gz|Zlib|https://en.wikipedia.org/wiki/Zlib
-Datatables|1.10.16|Admin|May 26, 2018|https://datatables.net/|https://datatables.net/download/|MIT|https://github.com/DataTables/DataTables
-Semantic UI|2.3|Admin|May 26, 2018|https://semantic-ui.com/|https://github.com/Semantic-Org/Semantic-UI-CSS/archive/master.zip|MIT|https://github.com/Semantic-Org/Semantic-UI
-Clio|0.1.0|Admin|May 26, 2018|https://github.com/eellak/clio|https://github.com/eellak/clio|GPL-3.0-or-later|
-Bootstrap|4.1|Admin|May 26, 2018|https://getbootstrap.com/|https://getbootstrap.com/docs/4.1/getting-started/download/|MIT|https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework)
+Zlib,1.2.6,Admin,2018-05-25,http://www.zlib.net/,http://www.zlib.net/zlib-1.2.11.tar.gz,Zlib,https://en.wikipedia.org/wiki/Zlib
+Datatables,1.10.16,Admin,2018-05-26,https://datatables.net/,https://datatables.net/download/,MIT,https://github.com/DataTables/DataTables
+Semantic UI,2.3,Admin,2018-05-26,https://semantic-ui.com/,https://github.com/Semantic-Org/Semantic-UI-CSS/archive/master.zip,MIT,https://github.com/Semantic-Org/Semantic-UI
+Clio,0.1.0,Admin,2018-05-26,https://github.com/eellak/clio,https://github.com/eellak/clio,GPL-3.0-or-later,
+Bootstrap,4.1,Admin,2018-05-26,https://getbootstrap.com/,https://getbootstrap.com/docs/4.1/getting-started/download/,MIT,https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework)

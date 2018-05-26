@@ -9,7 +9,7 @@ def populate_license(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'license-info.csv'))
     with open(path) as input_file:
-        read_csv = csv.reader(input_file, delimiter='|')
+        read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             full_name = row[0]
             identifier = row[1]
@@ -33,14 +33,13 @@ def populate_component(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'component-info.csv'))
     with open(path) as input_file:
-        read_csv = csv.reader(input_file, delimiter='|')
+        read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             name = row[0]
             version = row[1]
             created_by = row[2]
             pub_date = row[3]
-            pub_date = datetime.strptime(pub_date, '%B %d, %Y')
-            pub_date = pub_date.strftime('%Y-%m-%d')
+            pub_date = datetime.strptime(pub_date, '%Y-%m-%d')
             origin = row[4]
             source_url = row[5]
             license_expression = row[6]
@@ -55,7 +54,7 @@ def populate_component_conn(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'component-relationship.csv'))
     with open(path) as input_file:
-        read_csv = csv.reader(input_file, delimiter='|')
+        read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             input_c1_name = row[0]
             c1 = Component.query.filter_by(name=input_c1_name).first()
@@ -69,15 +68,14 @@ def populate_product(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'product-info.csv'))
     with open(path) as input_file:
-        read_csv = csv.reader(input_file, delimiter='|')
+        read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             name = row[0]
             version = row[1]
             owner = row[2]
             approver = row[3]
             approval_date = row[4]
-            approval_date = datetime.strptime(approval_date, '%B %d, %Y')
-            approval_date = approval_date.strftime('%Y-%m-%d')
+            approval_date = datetime.strptime(approval_date, '%Y-%m-%d')
             license_identifier = row[5]
             l = License.query.filter_by(identifier=license_identifier).first()
             p = Product(name, version, owner, approver, approval_date)
@@ -90,7 +88,7 @@ def populate_product_component_conn(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'product-component-relationship.csv'))
     with open(path) as input_file:
-        read_csv = csv.reader(input_file, delimiter='|')
+        read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             product_info = row[0].split('-')
             p = Product.query.filter_by(

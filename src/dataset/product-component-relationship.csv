@@ -1,5 +1,5 @@
-MyProd-1.0|CONTAINS|Zlib-1.2.6|UNMODIFIED|Delivered in BINARY
-MyProd-1.0|CONTAINS|Datatables-1.10.16|UNMODIFIED|Delivered in BINARY
-MyProd-1.0|CONTAINS|Semantic UI-2.3|MODIFIED|Delivered in BINARY
-MyProd-1.0|CONTAINS|Clio-0.1.0|UNMODIFIED|Delivered in SOURCE
-MyProd-1.0|DYNAMIC_LINK|Bootstrap-4.1|UNMODIFIED|NOT-Delivered
+MyProd-1.0,CONTAINS,Zlib-1.2.6,UNMODIFIED,Delivered in BINARY
+MyProd-1.0,CONTAINS,Datatables-1.10.16,UNMODIFIED,Delivered in BINARY
+MyProd-1.0,CONTAINS,Semantic UI-2.3,MODIFIED,Delivered in BINARY
+MyProd-1.0,CONTAINS,Clio-0.1.0,UNMODIFIED,Delivered in SOURCE
+MyProd-1.0,DYNAMIC_LINK,Bootstrap-4.1,UNMODIFIED,NOT-Delivered
