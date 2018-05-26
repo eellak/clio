@@ -61,7 +61,7 @@ def populate_component_conn(directory):
             input_c2_name = row[2]
             c2 = Component.query.filter_by(name=input_c2_name).first()
             c1.components.append(c2)
-            db.session.commit()
+        db.session.commit()
 
 
 if __name__ == '__main__':
