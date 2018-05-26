@@ -7,7 +7,7 @@ from datetime import datetime
 
 def populate_license(directory):
     path = os.path.join(os.getcwd(), os.path.join(
-        directory, 'input-license.csv'))
+        directory, 'input-license-info.csv'))
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
@@ -63,6 +63,21 @@ def populate_component_conn(directory):
             c1.components.append(c2)
         db.session.commit()
 
+def populate_product(directory):
+    path = os.path.join(os.getcwd(), os.path.join(directory, 'input-product-info.csv'))
+    with open(path) as input_file:
+        read_csv = csv.reader(input_file, delimiter='|')
+        for row in read_csv:
+            name = row[0]
+            version = row[1]
+            owner = row[2]
+            approver = row[3]
+            approval_date = row[4]
+            approval_date = datetime.strptime(approval_date, '%B %d, %Y')
+            approval_date = approval_date.strftime('%Y-%m-%d')
+            p = Product(name, version, owner, approver, approval_date)
+            db.session.add(p)
+            db.session.commit()
 
 if __name__ == '__main__':
     # Recreate DB
@@ -73,3 +88,4 @@ if __name__ == '__main__':
     populate_license(directory)
     populate_component(directory)
     populate_component_conn(directory)
+    populate_product(directory)
