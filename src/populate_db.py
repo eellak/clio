@@ -78,7 +78,10 @@ def populate_product(directory):
             approval_date = row[4]
             approval_date = datetime.strptime(approval_date, '%B %d, %Y')
             approval_date = approval_date.strftime('%Y-%m-%d')
+            license_identifier = row[5]
+            l = License.query.filter_by(identifier=license_identifier).first()
             p = Product(name, version, owner, approver, approval_date)
+            p.license = l
             db.session.add(p)
             db.session.commit()
 
