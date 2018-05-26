@@ -100,6 +100,7 @@ class Component(db.Model):
 
         self.name = name
         self.version = version
+        self.created_by = created_by
         self.pub_date = pub_date
         self.origin = origin
         self.source_url = source_url

@@ -1,10 +1,12 @@
 import csv
+import os
 from models import *
 from app import db
+from datetime import datetime
 
-
-def populate_license():
-    with open('input-license.csv') as input_file:
+def populate_license(directory):
+    path = os.path.join(os.getcwd(), os.path.join(directory, 'input-license.csv'))
+    with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
             full_name = row[0]
@@ -24,9 +26,30 @@ def populate_license():
             db.session.add(l)
             db.session.commit()
 
+def populate_component(directory):
+    path = os.path.join(os.getcwd(), os.path.join(directory, 'input-component-info.csv'))
+    with open(path) as input_file:
+        read_csv = csv.reader(input_file, delimiter='|')
+        for row in read_csv:
+            name = row[0]
+            version = row[1]
+            created_by = row[2]
+            pub_date = row[3]
+            pub_date = datetime.strptime(pub_date, '%B %d, %Y')
+            pub_date = pub_date.strftime('%Y-%m-%d')
+            origin = row[4]
+            source_url = row[5]
+            license_expression = row[6]
+            ext_link = row[7]
+            c = Component(name, version, created_by, pub_date, origin, source_url, license_expression, ext_link)
+            db.session.add(c)
+            db.session.commit()
+
 if __name__ == '__main__':
     # Recreate DB
     db.drop_all()
     db.create_all()
 
-    populate_license()
+    directory = 'dataset'
+    populate_license(directory)
+    populate_component(directory)
