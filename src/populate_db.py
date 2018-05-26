@@ -7,7 +7,7 @@ from datetime import datetime
 
 def populate_license(directory):
     path = os.path.join(os.getcwd(), os.path.join(
-        directory, 'input-license-info.csv'))
+        directory, 'license-info.csv'))
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
@@ -24,14 +24,14 @@ def populate_license(directory):
             license_category = row[4]
             license_text = row[5]
             l = License(full_name, identifier, fsf_free_libre,
-                    osi_approved, license_category, license_text)
+                        osi_approved, license_category, license_text)
             db.session.add(l)
             db.session.commit()
 
 
 def populate_component(directory):
     path = os.path.join(os.getcwd(), os.path.join(
-        directory, 'input-component-info.csv'))
+        directory, 'component-info.csv'))
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
@@ -46,13 +46,14 @@ def populate_component(directory):
             license_expression = row[6]
             ext_link = row[7]
             c = Component(name, version, created_by, pub_date,
-                    origin, source_url, license_expression, ext_link)
+                          origin, source_url, license_expression, ext_link)
             db.session.add(c)
             db.session.commit()
 
+
 def populate_component_conn(directory):
     path = os.path.join(os.getcwd(), os.path.join(
-        directory, 'input-component-relationship.csv'))
+        directory, 'component-relationship.csv'))
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
@@ -63,8 +64,10 @@ def populate_component_conn(directory):
             c1.components.append(c2)
         db.session.commit()
 
+
 def populate_product(directory):
-    path = os.path.join(os.getcwd(), os.path.join(directory, 'input-product-info.csv'))
+    path = os.path.join(os.getcwd(), os.path.join(
+        directory, 'product-info.csv'))
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter='|')
         for row in read_csv:
@@ -79,6 +82,32 @@ def populate_product(directory):
             db.session.add(p)
             db.session.commit()
 
+
+def populate_product_component_conn(directory):
+    path = os.path.join(os.getcwd(), os.path.join(
+        directory, 'product-component-relationship.csv'))
+    with open(path) as input_file:
+        read_csv = csv.reader(input_file, delimiter='|')
+        for row in read_csv:
+            product_info = row[0].split('-')
+            p = Product.query.filter_by(
+                name=product_info[0], version=product_info[1]).first()
+            relation = row[1]
+            component_info = row[2].split('-')
+            c = Component.query.filter_by(
+                name=component_info[0], version=component_info[1]).first()
+            modification = row[3]
+            if(modification == 'MODIFIED'):
+                modification = True
+            else:
+                modification = False
+            delivery = row[4]
+            product_component_conn = Product_Component_conn(
+                p, c, relation, modification, delivery)
+            db.session.add(product_component_conn)
+            db.session.commit()
+
+
 if __name__ == '__main__':
     # Recreate DB
     db.drop_all()
@@ -89,3 +118,4 @@ if __name__ == '__main__':
     populate_component(directory)
     populate_component_conn(directory)
     populate_product(directory)
+    populate_product_component_conn(directory)
