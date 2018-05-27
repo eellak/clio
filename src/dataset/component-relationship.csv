@@ -1,4 +1,4 @@
-Clio,CONTAINS,Zlib
-Clio,CONTAINS,Datatables
-Clio,CONTAINS,Semantic UI
-Clio,CONTAINS,Bootstrap
+Component1,CONTAINS,Zlib
+Component1,CONTAINS,Datatables
+Component1,CONTAINS,Semantic UI
+Component1,CONTAINS,Bootstrap
