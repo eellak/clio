@@ -96,10 +96,11 @@ class Component(db.Model):
     product_conn = db.relationship(
         "Product_Component_conn", back_populates="component")
 
-    def __init__(self, name, version, pub_date=None, origin=None, source_url=None, license_expression=None, ext_link=None):
+    def __init__(self, name, version, created_by=None, pub_date=None, origin=None, source_url=None, license_expression=None, ext_link=None):
 
         self.name = name
         self.version = version
+        self.created_by = created_by
         self.pub_date = pub_date
         self.origin = origin
         self.source_url = source_url
