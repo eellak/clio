@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <link rel="stylesheet" type="text/css" href="/static/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/table.css">
-    <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+<div class="ui main container">
+    <link rel="stylesheet" type="text/css" href="/static/dataTables.semanticui.min.css">
     <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/dataTables.semanticui.min.js"></script>
     <script>
     $(document).ready(function() {
-	$("#li-product").addClass("active")
+	$("#a-product").addClass("active")
         $("#product").DataTable();
     } );
     </script>
 
-    <table id="product" class="display" style="width:100%">
+    <table id="product" class="ui celled table" style="width:100%">
 	<thead>
 	    <tr>
 		<th>Name</th>

@@ -1,37 +1,27 @@
 <!doctype html>
 <html lang="en">
+    <style>
+	.ui.segment.inverted {
+	    border-radius: 0px !important;
+	}
+    </style>
     <head>
 	<title>Clio</title>
 	<meta charset="utf-8">
-	<link href="/static/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/sticky-footer-navbar.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+        <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="/static/semantic.min.js"></script>
     </head>
     <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-	    <a class="navbar-brand" href="/home">Clio</a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarCollapse">
-		<ul class="navbar-nav mr-auto">
-		    <li id="li-license" class="nav-item">
-			<a class="nav-link" href="/license">License</a>
-		    </li>
-		    <li id="li-component" class="nav-item">
-			<a class="nav-link" href="/component">Component</a>
-		    </li>
-		    <li id="li-product" class="nav-item">
-			<a class="nav-link" href="/product">Product</a>
-		    </li>
-		</ul>
+	<div class="ui segment inverted">
+	    <div class="ui inverted secondary pointing menu">
+	    <a class="item" id="a-home" href="/home">Clio</a>
+	    <a class="item" id="a-license" href="/license">License</a>
+	    <a class="item" id="a-component" href="/component">Component</a>
+	    <a class="item" id="a-product" href="/product">Product</a>
 	    </div>
-	</nav>
+	</div>
 	{% block content %}{% endblock %}
-	<footer class="footer">
-	    <div class="container">
-		<span class="text-muted">&copy; 2018 Company, Inc.</span>
-	    </div>
-	</footer>
     </body>
 </html>
 

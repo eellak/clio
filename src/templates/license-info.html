@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<div class="container">
-    <h2 class="text-dark"> {{ license.full_name }} </h2>
-    <h5 class="text-info">Full Name</h5>
-    <p class="text-secondary"> {{ license.full_name }} </p>
-    <h5 class="text-info">Short identifier</h5>
-    <p class="text-secondary"> {{ license.identifier }} </p>
-    <h5 class="text-info">License Category</h5>
-    <p class="text-secondary"> {{ license.license_category }} </p>
-    <h5 class="text-info">Text</h5>
-    <p class="text-secondary"> {{ license.license_text }} </p>
+<div class="ui main container">
+    <h1 class="ui header"> {{ license.full_name }} </h2>
+    <h3 class="ui teal header">Full Name</h3>
+    <h5 class="ui blue header"> {{ license.full_name }} </h5>
+    <h3 class="ui teal header">Short identifier</h3>
+    <h5 class="ui blue header"> {{ license.identifier }} </h5>
+    <h3 class="ui teal header">License Category</h3>
+    <h5 class="ui blue header"> {{ license.license_category }} </h5>
+    <h3 class="ui teal header">Text</h3>
+    <h5 class="ui blue header"> {{ license.license_text }} </h5>
 </div>
 {% endblock %}

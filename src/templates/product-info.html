@@ -2,33 +2,33 @@
 
 {% block content %}
 
-<div class="container">
-    <h2 class="text-dark"> {{ product.name }} </h2>
-    <h5 class="text-info">Name</h5>
-    <p class="text-secondary"> {{ product.name }} </p>
-    <h5 class="text-info">Version</h5>
-    <p class="text-secondary"> {{ product.version }} </p>
-    <h5 class="text-info">Out-Bound License (OBL)</h5>
+<div class="ui main container">
+    <h1 class="ui header"> {{ product.name }} </h2>
+    <h3 class="ui teal header">Name</h3>
+    <h5 class="ui blue header"> {{ product.name }} </h5>
+    <h3 class="ui teal header">Version</h3>
+    <h5 class="ui blue header"> {{ product.version }} </h5>
+    <h3 class="ui teal header">Out-Bound License (OBL)</h3>
     {% if product.license %}
-        <p class="text-secondary"><a href={{ url_for('license_info', id=product.license.id) }}> {{ product.license.full_name }} </a></p>
+        <h5 class="ui blue header"><a href={{ url_for('license_info', id=product.license.id) }}> {{ product.license.full_name }} </a></h5>
     {% else %}
-	<p class=}text-secondary"><a href='#'> None </a></p>
+	<h5 class="ui blue header"><a href='#'> None </a></h5>
     {% endif %}
-    <h5 class="text-info">Owner</h5>
-    <p class="text-secondary"> {{ product.owner }} </p>
-    <h5 class="text-info">Approver</h5>
-    <p class="text-secondary"> {{ product.approver }} </p>
-    <h5 class="text-info">Approval Date</h5>
-    <p class="text-secondary"> {{ product.approval_date }} </p>
-    <h5 class="text-info">Associated Components</h5>
+    <h3 class="ui teal header">Owner</h3>
+    <h5 class="ui blue header"> {{ product.owner }} </h5>
+    <h3 class="ui teal header">Approver</h3>
+    <h5 class="ui blue header"> {{ product.approver }} </h5>
+    <h3 class="ui teal header">Approval Date</h3>
+    <h5 class="ui blue header"> {{ product.approval_date }} </h5>
+    <h3 class="ui teal header">Associated Components</h3>
     {% if product.component_conn %}
         <ul>
 	{% for conn in product.component_conn %}
-	    <li><p class="text-secondary"> {{ conn.relation }} <a href={{ url_for('component_info', id=conn.component.id) }}> {{ conn.component.name }}</a>, Modified : {{ conn.modification }}, Delivery : {{ conn.delivery }}</p></li>
+	    <li><h5 class="ui blue header"> {{ conn.relation }} <a href={{ url_for('component_info', id=conn.component.id) }}> {{ conn.component.name }}</a>, Modified : {{ conn.modification }}, Delivery : {{ conn.delivery }}</h5></li>
 	{% endfor %}
 	</ul>
     {% else %}
-	<p class="text-secondary">None</p>
+	<h5 class="ui blue header">None</h5>
     {% endif %}
 </div>
 {% endblock %}
