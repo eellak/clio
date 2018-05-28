@@ -3,6 +3,7 @@ import os
 from models import *
 from app import db
 from datetime import datetime
+from specification import *
 
 
 def populate_license(directory):
@@ -17,7 +18,7 @@ def populate_license(directory):
                 fsf_free_libre = True
             else:
                 fsf_free_libre = False
-            if(row[3] == 'OSI approved'):
+            if(row[3] == 'OSI Approved'):
                 osi_approved = True
             else:
                 osi_approved = False
@@ -56,11 +57,12 @@ def populate_component_conn(directory):
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
-            input_c1_name = row[0]
-            c1 = Component.query.filter_by(name=input_c1_name).first()
-            input_c2_name = row[2]
-            c2 = Component.query.filter_by(name=input_c2_name).first()
-            c1.components.append(c2)
+            if(row[1] in valid_relationship):
+                input_c1_name = row[0]
+                c1 = Component.query.filter_by(name=input_c1_name).first()
+                input_c2_name = row[2]
+                c2 = Component.query.filter_by(name=input_c2_name).first()
+                c1.components.append(c2)
         db.session.commit()
 
 
@@ -90,23 +92,24 @@ def populate_product_component_conn(directory):
     with open(path) as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
-            product_info = row[0].split('-')
-            p = Product.query.filter_by(
-                name=product_info[0], version=product_info[1]).first()
-            relation = row[1]
-            component_info = row[2].split('-')
-            c = Component.query.filter_by(
-                name=component_info[0], version=component_info[1]).first()
-            modification = row[3]
-            if(modification == 'MODIFIED'):
-                modification = True
-            else:
-                modification = False
-            delivery = row[4]
-            product_component_conn = Product_Component_conn(
-                p, c, relation, modification, delivery)
-            db.session.add(product_component_conn)
-            db.session.commit()
+            if(row[1] in valid_relationship):
+                product_info = row[0].split('-')
+                p = Product.query.filter_by(
+                    name=product_info[0], version=product_info[1]).first()
+                relation = row[1]
+                component_info = row[2].split('-')
+                c = Component.query.filter_by(
+                    name=component_info[0], version=component_info[1]).first()
+                modification = row[3]
+                if(modification == 'MODIFIED'):
+                    modification = True
+                else:
+                    modification = False
+                delivery = row[4]
+                product_component_conn = Product_Component_conn(
+                    p, c, relation, modification, delivery)
+                db.session.add(product_component_conn)
+                db.session.commit()
 
 
 if __name__ == '__main__':
