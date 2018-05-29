@@ -1,3 +1,8 @@
+# -------------------------------------------------------------------
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See GPL-3.0-or-later in the Licenses folder for license information
+# -------------------------------------------------------------------
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime

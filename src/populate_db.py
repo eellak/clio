@@ -1,3 +1,8 @@
+# -------------------------------------------------------------------
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See GPL-3.0-or-later in the Licenses folder for license information
+# -------------------------------------------------------------------
+
 import csv
 import os
 from models import *

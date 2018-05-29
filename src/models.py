@@ -1,3 +1,8 @@
+# -------------------------------------------------------------------
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See GPL-3.0-or-later in the Licenses folder for license information
+# -------------------------------------------------------------------
+
 from app import db
 from sqlalchemy.ext.associationproxy import association_proxy
 
