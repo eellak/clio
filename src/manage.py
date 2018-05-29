@@ -1,3 +1,8 @@
+# -------------------------------------------------------------------
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See GPL-3.0-or-later in the Licenses folder for license information
+# -------------------------------------------------------------------
+
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
