@@ -8,7 +8,8 @@
 <script>
 $(document).ready(function() {
     $('#pub_date').calendar({
-	type: 'date'
+	type: 'date', 
+	maxDate: new Date()
     });
     $('.ui.dropdown').dropdown({
 	forceSelection: false, 
