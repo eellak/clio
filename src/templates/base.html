@@ -6,27 +6,26 @@
 <!doctype html>
 <html lang="en">
     <style>
-	.ui.segment.inverted {
-	    border-radius: 0px !important;
-	}
+    .ui.segment.inverted {
+	border-radius: 0px !important;
+    }
     </style>
     <head>
 	<title>Clio</title>
 	<meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
-        <script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+	<script type="text/javascript" src="/static/jquery-1.12.4.js"></script>
 	<script type="text/javascript" src="/static/semantic.min.js"></script>
     </head>
     <body>
 	<div class="ui segment inverted">
 	    <div class="ui inverted secondary pointing menu">
-	    <a class="item" id="a-home" href="/home">Clio</a>
-	    <a class="item" id="a-license" href="/license">License</a>
-	    <a class="item" id="a-component" href="/component">Component</a>
-	    <a class="item" id="a-product" href="/product">Product</a>
+		<a class="item" id="a-home" href="/home">Clio</a>
+		<a class="item" id="a-license" href="/license">License</a>
+		<a class="item" id="a-component" href="/component">Component</a>
+		<a class="item" id="a-product" href="/product">Product</a>
 	    </div>
 	</div>
 	{% block content %}{% endblock %}
     </body>
 </html>
-

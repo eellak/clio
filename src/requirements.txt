@@ -11,3 +11,5 @@ python-editor==1.0.3
 six==1.11.0
 python-dateutil==2.7.2
 alembic==0.9.9
+boolean.py==3.5
+license-expression=0.97
