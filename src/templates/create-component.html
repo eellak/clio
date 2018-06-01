@@ -44,20 +44,22 @@ $(document).ready(function() {
 	    There where some errors with your submission
 	</div>
 	<ul>
-	{% for error in errors %}
-	<li> {{ error }} </li>
-	{% endfor %}
+	    {% for error in errors %}
+	    <li> {{ error }} </li>
+	    {% endfor %}
 	</ul>
     </div>
     {% endif %}
     {% endwith %}
-    {% with success = get_flashed_messages(category_filter=['success'])[0] %}
-    {% if(success) %}
+    {% with success_messages = get_flashed_messages(category_filter=['success']) %}
+    {% if(success_messages) %}
+    {% for success_message in success_messages %}
     <div class="ui success message">
 	<div class="header">
-	    {{ success }} 
+	    {{ success_message }} 
 	</div>
     </div>
+    {% endfor %}
     {% endif %}
     {% endwith %}
     <form class="ui equal width form" action={{ url_for("create_component") }} method="post">

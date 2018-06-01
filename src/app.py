@@ -77,12 +77,26 @@ def create_component():
 
         # Validation
         is_valid = True
+
         exp = is_valid_license_expression(license_expression)
         if(exp is None):
             is_valid = False
             flash('Invalid License Expression', 'error')
         else:
             license_expression = exp
+
+        if(not is_valid_url(origin)):
+            is_valid = False
+            flash('Invalid Origin URL', 'error')
+
+        if(not is_valid_url(source_url)):
+            is_valid = False
+            flash('Invalid Source URL', 'error')
+
+        if(not is_valid_url(ext_link)):
+            is_valid = False
+            flash('Invalid External Link', 'error')
+
         if(pub_date != ''):
             pub_date = datetime.strptime(pub_date, '%B %d, %Y')
             pub_date = pub_date.strftime('%Y-%m-%d')
