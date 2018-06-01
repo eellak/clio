@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link href="/static/calendar.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/calendar.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#pub_date').calendar({
+	type: 'date', 
+	maxDate: new Date()
+    });
+    $('.ui.dropdown').dropdown({
+	forceSelection: false, 
+	selectOnKeydown: false, 
+	showOnFocus: false,
+	on: "hover" 
+    });
+    $('.ui.form')
+	.form({
+	    fields: {
+		name     : 'empty',
+		version  : 'empty',
+	    }
+	})
+    ;
+});
+</script>
+
+<style>
+.ui.main.container {
+    margin-top: 50px !important;
+}
+.ui.dividing.header {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+</style>
+<div class="ui main container">
+    {% with errors = get_flashed_messages(category_filter=['error']) %}
+    {% if(errors) %}
+    <div class="ui error message">
+	<div class="header">
+	    There where some errors with your submission
+	</div>
+	<ul>
+	    {% for error in errors %}
+	    <li> {{ error }} </li>
+	    {% endfor %}
+	</ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% with success_messages = get_flashed_messages(category_filter=['success']) %}
+    {% if(success_messages) %}
+    {% for success_message in success_messages %}
+    <div class="ui success message">
+	<div class="header">
+	    {{ success_message }} 
+	</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
+	<h4 class="ui dividing header">Create Component</h4>
+	<div class="fields">
+	    <div class="required field">
+		<label>Component Name</label>
+		<input type="text" name="name" placeholder="Name">
+	    </div>
+	    <div class="required field">
+		<label>Version</label>
+		<input type="text" name="version" placeholder="Version">
+	    </div>
+	</div>
+	<div class="fields">
+	    <div class="field">
+		<label>License Expression</label>
+		<input type="text" name="license_expression" placeholder="Expression">
+	    </div>
+	    <div class="field">
+		<label>Created By</label>
+		<input type="text" name="created_by" placeholder="By">
+	    </div>
+	</div>
+	<div class="fields">
+	    <div class="field">
+		<label>Origin Website</label>
+		<input type="text" name="origin" placeholder="Origin">
+	    </div>
+	    <div class="field">
+		<label>Source URL</label>
+		<input type="text" name="source_url" placeholder="Source">
+	    </div>
+	    <div class="field">
+		<label>External Link</label>
+		<input type="text" name="ext_link" placeholder="Link">
+	    </div>
+	</div>
+	<div class="fields ui calender" id="pub_date">
+	    <div class="field">
+		<label>Publication Date</label>
+		<div class="ui input left icon">
+		    <i class="calendar icon"></i>
+		    <input type="text" name="pub_date" placeholder="Date">
+		</div>
+	    </div>
+	</div>
+	<br />
+	<select name="components" class="ui fluid search dropdown" multiple="">
+	    <option value="">Component</option>
+	    {% for component in components %}
+	    <option value="{{ component.name }}">{{ component.name }}</option>
+	    {% endfor %}
+	</select>
+	<br />
+	<button class="ui primary button" type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}
