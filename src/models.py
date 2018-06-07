@@ -4,7 +4,6 @@
 # -------------------------------------------------------------------
 
 from app import db
-from sqlalchemy.ext.associationproxy import association_proxy
 
 
 # Middle table that connects two components
