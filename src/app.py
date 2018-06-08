@@ -3,9 +3,8 @@
 # See GPL-3.0-or-later in the Licenses folder for license information
 # -------------------------------------------------------------------
 
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 
 # Flask Initialization
 app = Flask(__name__)
@@ -17,7 +16,7 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 from models import *
-from specification import *
+from specification import is_valid_component_info
 
 
 @app.route('/')
@@ -76,32 +75,8 @@ def create_component():
         pub_date = request.form['pub_date']
 
         # Validation
-        is_valid = True
-
-        exp = is_valid_license_expression(license_expression)
-        if(exp is None):
-            is_valid = False
-            flash('Invalid License Expression', 'error')
-        else:
-            license_expression = exp
-
-        if(not is_valid_url(origin)):
-            is_valid = False
-            flash('Invalid Origin URL', 'error')
-
-        if(not is_valid_url(source_url)):
-            is_valid = False
-            flash('Invalid Source URL', 'error')
-
-        if(not is_valid_url(ext_link)):
-            is_valid = False
-            flash('Invalid External Link', 'error')
-
-        if(pub_date != ''):
-            pub_date = datetime.strptime(pub_date, '%B %d, %Y')
-            pub_date = pub_date.strftime('%Y-%m-%d')
-        else:
-            pub_date = None
+        is_valid, license_expression, pub_date = is_valid_component_info(
+            license_expression, origin, source_url, ext_link, pub_date)
 
         if(is_valid is True):
             c = Component(name, version, pub_date=pub_date, origin=origin,
@@ -121,6 +96,70 @@ def create_component():
 
     components = Component.query.all()
     return render_template('create-component.html', components=components)
+
+
+@app.route('/update/component/', methods=['GET', 'POST'])
+def update_component():
+    if request.method == 'POST':
+        component_name = request.form['component']
+        component = Component.query.filter_by(name=component_name).first()
+        if(component):
+            return redirect(url_for('update_component_info', id=component.id))
+    components = Component.query.all()
+    return render_template('update-component.html', components=components)
+
+
+@app.route('/update/component/<int:id>', methods=['GET', 'POST'])
+def update_component_info(id):
+    if request.method == 'POST':
+        name = request.form['name']
+        version = request.form['version']
+        license_expression = request.form['license_expression']
+        created_by = request.form['created_by']
+        origin = request.form['origin']
+        source_url = request.form['source_url']
+        ext_link = request.form['ext_link']
+        components = request.form.getlist('components')
+        pub_date = request.form['pub_date']
+
+        # Validation
+        is_valid, license_expression, pub_date = is_valid_component_info(
+            license_expression, origin, source_url, ext_link, pub_date)
+
+        if(is_valid is True):
+            c = Component.query.filter_by(id=id).first()
+            if(c):
+                c.name = name
+                c.version = version
+                c.license_expression = license_expression
+                c.created_by = created_by
+                c.origin = origin
+                c.source_url = source_url
+                c.ext_link = ext_link
+                c.pub_date = pub_date
+
+                # Remove previously selected components
+                for comp in c.components:
+                    c.components.remove(comp)
+
+                # Add the newly selected components
+                for component_name in components:
+                    comp = Component.query.filter_by(name=component_name).first()
+                    if(comp):
+                        c.components.append(comp)
+
+                try:
+                    db.session.commit()
+                    flash('Component updated successfully', 'success')
+                except:
+                    db.session.rollback()
+                    flash('Please try again', 'error')
+
+    component = Component.query.filter_by(id=id).first()
+    # The permissible set of components should not contain itself
+    components = Component.query.filter(Component.id != id).all()
+    selected_components = [c.name for c in component.components.all()]
+    return render_template('update-component-info.html', component=component, components=components, selected_components=selected_components)
 
 
 @app.errorhandler(404)

@@ -15,12 +15,7 @@ $(document).ready(function() {
 	type: 'date', 
 	maxDate: new Date()
     });
-    $('.ui.dropdown').dropdown({
-	forceSelection: false, 
-	selectOnKeydown: false, 
-	showOnFocus: false,
-	on: "hover" 
-    });
+    $('.ui.fluid.dropdown').dropdown('set selected', {{ selected_components|tojson }});
     $('.ui.form')
 	.form({
 	    fields: {
@@ -41,6 +36,7 @@ $(document).ready(function() {
     margin-bottom: 30px !important;
 }
 </style>
+
 <div class="ui main container">
     {% with errors = get_flashed_messages(category_filter=['error']) %}
     {% if(errors) %}
@@ -67,40 +63,40 @@ $(document).ready(function() {
     {% endfor %}
     {% endif %}
     {% endwith %}
-    <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
-	<h4 class="ui dividing header">Create Component</h4>
+    <form class="ui equal width form" action={{ url_for("update_component_info", id=component.id) }} method="post">
+	<h4 class="ui dividing header">Update Component : <a href={{ url_for("component_info", id=component.id) }}>#{{ component.id }}</a></h4>
 	<div class="fields">
 	    <div class="required field">
 		<label>Component Name</label>
-		<input type="text" name="name" placeholder="Name">
+		<input type="text" name="name" placeholder="Name" value="{{ component.name }}">
 	    </div>
 	    <div class="required field">
 		<label>Version</label>
-		<input type="text" name="version" placeholder="Version">
+		<input type="text" name="version" placeholder="Version" value="{{ component.version }}">
 	    </div>
 	</div>
 	<div class="fields">
 	    <div class="field">
 		<label>License Expression</label>
-		<input type="text" name="license_expression" placeholder="Expression">
+		<input type="text" name="license_expression" placeholder="Expression" value="{{ component.license_expression }}">
 	    </div>
 	    <div class="field">
 		<label>Created By</label>
-		<input type="text" name="created_by" placeholder="By">
+		<input type="text" name="created_by" placeholder="By" value="{{ component.created_by if component.created_by}}">
 	    </div>
 	</div>
 	<div class="fields">
 	    <div class="field">
 		<label>Origin Website</label>
-		<input type="text" name="origin" placeholder="Origin">
+		<input type="text" name="origin" placeholder="Origin" value="{{ component.origin }}">
 	    </div>
 	    <div class="field">
 		<label>Source URL</label>
-		<input type="text" name="source_url" placeholder="Source">
+		<input type="text" name="source_url" placeholder="Source" value="{{ component.source_url }}">
 	    </div>
 	    <div class="field">
 		<label>External Link</label>
-		<input type="text" name="ext_link" placeholder="Link">
+		<input type="text" name="ext_link" placeholder="Link" value="{{ component.ext_link }}">
 	    </div>
 	</div>
 	<div class="fields ui calender" id="pub_date">
@@ -108,7 +104,7 @@ $(document).ready(function() {
 		<label>Publication Date</label>
 		<div class="ui input left icon">
 		    <i class="calendar icon"></i>
-		    <input type="text" name="pub_date" placeholder="Date">
+		    <input type="text" name="pub_date" placeholder="Date" value={{ component.pub_date.strftime('%m/%d/%Y') if component.pub_date }}>
 		</div>
 	    </div>
 	</div>
