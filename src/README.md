@@ -5,11 +5,18 @@
 ### Dependencies to run Clio
 
 * Python 3
-* MySQL
+* MySQL or PostgreSQL or Sqlite3
 
 For Debian-based Linux users
 ```
+# To install Sqlite3
+$ sudo apt-get install sqlite3
+
+# To install MySQL
 $ sudo apt-get install mysql-server
+
+# To install PostgreSQL
+$ sudo apt-get install postgresql postgresql-contrib
 ```
 
 ### Steps
@@ -28,13 +35,28 @@ $ sudo -H pip3 install -r requirements.txt
 ```
 Hint : You may need to upgrade your pip version and install the following packages if you encounter errors while installing the requirements.
 
-* **Step 2** - Create the database. For that we will first open the MySQL shell.
+* **Step 2** - Create the database. For this you might have to open the the database shell.
 ```
+# Sqlite3
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///clio.sqlite3' 
+
+
+# MySQL
 $ sudo mysql -u username -p
 
 mysql> CREATE DATABASE clio;
 
 mysql> exit
+# SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/clio'
+
+
+# PostgreSQL
+$ psql
+
+user=> CREATE DATABASE clio;
+
+user=> \q
+# SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost/clio'
 ```
 Update the `SQLALCHEMY_DATABASE_URI` in `config.py`  
 
