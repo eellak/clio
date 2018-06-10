@@ -4,6 +4,7 @@
 
 ### Dependencies to run Clio
 
+*Please refer to `software-components.rst` to know the various software components used in clio*
 * Python 3
 * MySQL or PostgreSQL or Sqlite3
 
