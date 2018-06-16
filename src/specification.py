@@ -9,12 +9,23 @@ from license_expression import Licensing
 import validators
 from flask import flash
 from datetime import datetime
+import csv
 
-valid_relationship = ('DESCRIBES', 'DESCRIBED_BY', 'CONTAINS', 'CONTAINED_BY', 'GENERATES', 'GENERATED_FROM', 'ANCESTOR_OF', 'DESCENDANT_OF', 'VARIANT_OF', 'DISTRIBUTION_ARTIFACT', 'PATCH_FOR', 'PATCH_APPLIED', 'COPY_OF', 'FILE_ADDED', 'FILE_DELETED',
-                      'FILE_MODIFIED', 'EXPANDED_FROM_ARCHIVE', 'DYNAMIC_LINK', 'STATIC_LINK', 'DATA_FILE_OF', 'TEST_CASE_OF', 'BUILD_TOOL_OF', 'DOCUMENTATION_OF', 'OPTIONAL_COMPONENT_OF', 'METAFILE_OF', 'PACKAGE_OF', 'AMENDS', 'PREREQUISITE_FOR', 'HAS_PREREQUISITE', 'OTHER')
+valid_relationship = None
+with open('valid-relationship.csv') as input_file:
+    read_csv = csv.reader(input_file, delimiter=',')
+    relations = list()
+    for row in read_csv:
+        relations.extend(row)
+    valid_relationship = tuple(relations)
 
-valid_delivery = ('SOURCE', 'BINARY', 'ARCHIVE', 'APPLICATION',
-                  'AUDIO', 'IMAGE', 'TEXT', 'VIDEO', 'DOCUMENTATION', 'SPDX', 'OTHER', 'NOT-DELIVERED')
+valid_delivery = None
+with open('valid-delivery.csv') as input_file:
+    read_csv = csv.reader(input_file, delimiter=',')
+    delivery = list()
+    for row in read_csv:
+        delivery.extend(row)
+    valid_delivery = tuple(delivery)
 
 
 def is_valid_license_expression(expression):
@@ -97,5 +108,5 @@ def is_valid_component_info(license_expression, origin, source_url, ext_link, pu
         pub_date = pub_date.strftime('%Y-%m-%d')
     else:
         pub_date = None
- 
+
     return is_valid, license_expression, pub_date
