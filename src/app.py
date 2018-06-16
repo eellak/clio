@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 
 from models import *
 from specification import is_valid_component_info
+from utils import set_boolean_value
 
 
 @app.route('/')
@@ -146,7 +147,8 @@ def update_component_info(id):
 
                 # Add the newly selected components
                 for component_name in components:
-                    comp = Component.query.filter_by(name=component_name).first()
+                    comp = Component.query.filter_by(
+                        name=component_name).first()
                     if(comp):
                         c.components.append(comp)
 
@@ -162,6 +164,32 @@ def update_component_info(id):
     components = Component.query.filter(Component.id != id).all()
     selected_components = [c.name for c in component.components.all()]
     return render_template('update-component-info.html', component=component, components=components, selected_components=selected_components)
+
+
+@app.route('/create/license/', methods=['GET', 'POST'])
+def create_license():
+    if request.method == 'POST':
+        full_name = request.form['full_name']
+        identifier = request.form['identifier']
+        license_category = request.form['license_category']
+        fsf_free_libre = request.form.get('fsf_free_libre', None)
+        osi_approved = request.form.get('osi_approved', None)
+        license_text = request.form['license_text']
+
+        fsf_free_libre = set_boolean_value(fsf_free_libre)
+        osi_approved = set_boolean_value(osi_approved)
+
+        l = License(full_name, identifier, fsf_free_libre,
+                    osi_approved, license_category, license_text)
+        try:
+            db.session.add(l)
+            db.session.commit()
+            flash('License created successfully', 'success')
+        except:
+            db.session.rollback()
+            flash('Please try again', 'error')
+
+    return render_template('create-license.html')
 
 
 @app.errorhandler(404)
