@@ -15,12 +15,12 @@
 </style>
 
 <div class="ui main container">
-    <h4 class="ui header">Select Component</h4> 
-    <form class="ui equal width form" action={{ url_for("update_component") }} method="post">
-	<select name="component" class="ui search selection dropdown">
-	    <option value="">Component</option>
-	    {% for component in components %}
-	    <option class="item" value="{{ component.name }}"> {{ component.name }} </option>
+    <h4 class="ui header">Select License</h4> 
+    <form class="ui equal width form" action={{ url_for("update_license") }} method="post">
+	<select name="license" class="ui search selection dropdown">
+	    <option value="">License</option>
+	    {% for license in licenses%}
+	    <option class="item" value="{{ license.full_name }}"> {{ license.full_name }} </option>
 	    {% endfor %}
 	</select>
 	<button class="ui primary button" type="submit">Submit</button>
