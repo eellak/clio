@@ -8,6 +8,13 @@
 
 {% block content %}
 <style>
+.ui.search.dropdown.selection {
+    float: right;
+    margin-top: -30px;
+}
+.ui.error.message, .ui.success.message {
+    margin-bottom: 50px;
+}
 .ui.main.container {
     margin-top: 50px !important;
 }
@@ -17,6 +24,13 @@
 }
 </style>
 <script>
+window.onload = function () {
+    var select_license = document.getElementById('select-license');
+    select_license.onchange = function () {
+	var id = select_license.options[select_license.selectedIndex].value;
+	window.location.href = '/update/license/' + id;
+    }
+}
 $(document).ready(function() {
     $('.ui.radio.checkbox').checkbox();
     $('.ui.form')
@@ -55,6 +69,14 @@ $(document).ready(function() {
     {% endfor %}
     {% endif %}
     {% endwith %}
+    <div>
+	<select id="select-license" class="ui search dropdown">
+	    <option value="">Search License</option>
+	    {% for license in licenses %}
+	    <option value="{{ license.id }}">{{ license.full_name }}</option>
+	    {% endfor %}
+	</select>
+    </div>
     <form class="ui equal width form" action={{ url_for("create_license") }} method="post">
 	<h4 class="ui dividing header">Create License</h4>
 	<div class="fields">

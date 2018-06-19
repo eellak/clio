@@ -189,7 +189,8 @@ def create_license():
             db.session.rollback()
             flash('Please try again', 'error')
 
-    return render_template('create-license.html')
+    licenses = License.query.all()
+    return render_template('create-license.html', licenses=licenses)
 
 
 @app.errorhandler(404)
