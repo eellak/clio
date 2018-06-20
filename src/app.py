@@ -192,6 +192,50 @@ def create_license():
     return render_template('create-license.html')
 
 
+@app.route('/license/update/', methods=['GET', 'POST'])
+def update_license():
+    if request.method == 'POST':
+        license_full_name = request.form['license']
+        license = License.query.filter_by(full_name=license_full_name).first()
+        if(license):
+            return redirect(url_for('update_license_info', id=license.id))
+    licenses = License.query.all()
+    return render_template('update-license.html', licenses=licenses)
+
+
+@app.route('/license/update/<int:id>', methods=['GET', 'POST'])
+def update_license_info(id):
+    if request.method == 'POST':
+        full_name = request.form['full_name']
+        identifier = request.form['identifier']
+        license_category = request.form['license_category']
+        fsf_free_libre = request.form.get('fsf_free_libre', None)
+        osi_approved = request.form.get('osi_approved', None)
+        license_text = request.form['license_text']
+
+        fsf_free_libre = set_boolean_value(fsf_free_libre)
+        osi_approved = set_boolean_value(osi_approved)
+
+        l = License.query.filter_by(id=id).first()
+        if(l):
+            l.full_name = full_name
+            l.identifier = identifier
+            l.license_category = license_category
+            l.fsf_free_libre = fsf_free_libre
+            l.osi_approved = osi_approved
+            l.license_text = license_text
+
+            try:
+                db.session.commit()
+                flash('License updated successfully', 'success')
+            except:
+                db.session.rollback()
+                flash('Please try again', 'error')
+
+    license = License.query.filter_by(id=id).first()
+    return render_template('update-license-info.html', license=license)
+
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
