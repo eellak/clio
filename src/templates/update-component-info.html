@@ -65,6 +65,7 @@ $(document).ready(function() {
     {% endfor %}
     {% endif %}
     {% endwith %}
+    {% include 'search-license-dropdown.html' %}
     <form class="ui equal width form" action={{ url_for("update_component_info", id=component.id) }} method="post">
 	<h4 class="ui dividing header">Update Component : <a href={{ url_for("component_info", id=component.id) }}>#{{ component.id }}</a></h4>
 	<div class="fields">

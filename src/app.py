@@ -98,7 +98,8 @@ def create_component():
                 flash('Please try again', 'error')
 
     components = Component.query.all()
-    return render_template('create-component.html', components=components)
+    licenses = License.query.all()
+    return render_template('create-component.html', components=components, licenses=licenses)
 
 
 @app.route('/update/component/', methods=['GET', 'POST'])
@@ -163,7 +164,8 @@ def update_component_info(id):
     # The permissible set of components should not contain itself
     components = Component.query.filter(Component.id != id).all()
     selected_components = [c.name for c in component.components.all()]
-    return render_template('update-component-info.html', component=component, components=components, selected_components=selected_components)
+    licenses = License.query.all()
+    return render_template('update-component-info.html', component=component, components=components, selected_components=selected_components, licenses=licenses)
 
 
 @app.route('/create/license/', methods=['GET', 'POST'])
@@ -189,8 +191,7 @@ def create_license():
             db.session.rollback()
             flash('Please try again', 'error')
 
-    licenses = License.query.all()
-    return render_template('create-license.html', licenses=licenses)
+    return render_template('create-license.html')
 
 
 @app.errorhandler(404)
