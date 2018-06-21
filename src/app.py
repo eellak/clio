@@ -64,7 +64,7 @@ def product_info(id):
     return render_template('product-info.html', product=product)
 
 
-@app.route('/create/component/', methods=['GET', 'POST'])
+@app.route('/component/create/', methods=['GET', 'POST'])
 def create_component():
     if request.method == 'POST':
         name = request.form['name']
@@ -101,7 +101,7 @@ def create_component():
     return render_template('create-component.html', components=components)
 
 
-@app.route('/update/component/', methods=['GET', 'POST'])
+@app.route('/component/update/', methods=['GET', 'POST'])
 def update_component():
     if request.method == 'POST':
         component_name = request.form['component']
@@ -112,7 +112,7 @@ def update_component():
     return render_template('update-component.html', components=components)
 
 
-@app.route('/update/component/<int:id>', methods=['GET', 'POST'])
+@app.route('/component/update/<int:id>', methods=['GET', 'POST'])
 def update_component_info(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -166,7 +166,7 @@ def update_component_info(id):
     return render_template('update-component-info.html', component=component, components=components, selected_components=selected_components)
 
 
-@app.route('/create/license/', methods=['GET', 'POST'])
+@app.route('/license/create/', methods=['GET', 'POST'])
 def create_license():
     if request.method == 'POST':
         full_name = request.form['full_name']
