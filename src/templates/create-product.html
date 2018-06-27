@@ -35,6 +35,7 @@ $(document).ready(function() {
 	    clone.find("select#delivery").attr("name", "delivery-"+length);
 	    clone.find("input#modification").attr("name", "modification-"+length);
 	    clone.find(".ui.dropdown").dropdown('clear');
+	    clone.find(".ui.checkbox").checkbox('uncheck');
 	    $("#selections").append(clone);
 	});
     });
