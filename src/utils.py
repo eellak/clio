@@ -12,3 +12,31 @@ def set_boolean_value(status):
     elif status == 'false':
         val = False
     return val
+
+
+def get_number_of_entries(data):
+    max_num = 0
+    for key in data:
+        if(key.startswith('component')):
+            num = int(key.split('-')[1])
+            if(num > max_num):
+                max_num = num
+    return max_num + 1
+
+
+def make_component_info(data):
+    index = 0
+    component_info = list()
+    max_entries = get_number_of_entries(data)
+    while(index < max_entries):
+        comp = list()
+        comp.append(data['component-' + str(index)])
+        comp.append(data['relation-' + str(index)])
+        comp.append(data['delivery-' + str(index)])
+        try:
+            comp.append(data['modification-' + str(index)])
+        except:
+            comp.append('')
+        component_info.append(tuple(comp))
+        index += 1
+    return tuple(component_info)

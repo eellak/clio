@@ -64,6 +64,15 @@ def is_valid_url(url):
     return (url == '' or validators.url(url))
 
 
+def get_date(date_string):
+    if(date_string != ''):
+        date_string = datetime.strptime(date_string, '%B %d, %Y')
+        date_string = date_string.strftime('%Y-%m-%d')
+    else:
+        date_string = None
+    return date_string
+
+
 def is_valid_component_info(license_expression, origin, source_url, ext_link, pub_date):
     """Checks if information provided on components is valid.
 
@@ -103,10 +112,6 @@ def is_valid_component_info(license_expression, origin, source_url, ext_link, pu
         is_valid = False
         flash('Invalid External Link', 'error')
 
-    if(pub_date != ''):
-        pub_date = datetime.strptime(pub_date, '%B %d, %Y')
-        pub_date = pub_date.strftime('%Y-%m-%d')
-    else:
-        pub_date = None
+    pub_date = get_date(pub_date)
 
     return is_valid, license_expression, pub_date
