@@ -18,8 +18,8 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 from models import *
-from specification import is_valid_component_info
-from utils import set_boolean_value
+from specification import *
+from utils import set_boolean_value, make_component_info
 
 
 @app.route('/')
@@ -234,6 +234,41 @@ def update_license_info(id):
 
     license = License.query.filter_by(id=id).first()
     return render_template('update-license-info.html', license=license)
+
+
+@app.route('/product/create/', methods=['GET', 'POST'])
+def create_product():
+    if request.method == 'POST':
+        name = request.form['name']
+        version = request.form['version']
+        owner = request.form['owner']
+        license = request.form['license']
+        approver = request.form['approver']
+        approval_date = get_date(request.form['approval_date'])
+
+        l = License.query.filter_by(full_name=license).first()
+        p = Product(name, version, owner, approver, approval_date)
+        p.license = l
+        db.session.add(p)
+        component_info = (make_component_info(request.form))
+
+        for info in component_info:
+            c = Component.query.filter_by(name=info[0]).first()
+            if(c):
+                modification = set_boolean_value(info[3])
+                pc = Product_Component_conn(
+                    p, c, info[1], modification, info[2])
+                db.session.add(pc)
+        try:
+            db.session.commit()
+            flash('Product created successfully', 'success')
+        except:
+            db.session.rollback()
+            flash('Please try again', 'error')
+
+    components = Component.query.all()
+    licenses = License.query.all()
+    return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
 
 
 @app.errorhandler(404)
