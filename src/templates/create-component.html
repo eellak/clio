@@ -69,6 +69,7 @@ $(document).ready(function() {
     {% endfor %}
     {% endif %}
     {% endwith %}
+    {% include 'search-license-dropdown.html' %}
     <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
 	<h4 class="ui dividing header">Create Component</h4>
 	<div class="fields">
