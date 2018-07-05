@@ -86,27 +86,27 @@ $(document).ready(function() {
     {% endif %}
     {% endwith %}
     {% include 'search-license-dropdown.html' %}
-    <form class="ui equal width form" action={{ url_for("create_product") }} method="post">
-	<h4 class="ui dividing header">Create Product</h4>
+    <form class="ui equal width form" action={{ url_for("update_product_info", id=product.id) }} method="post">
+	<h4 class="ui dividing header">Update Product : <a href={{ url_for("product_info", id=product.id) }}>#{{ product.id }}</a></h4>
 	<div class="fields">
 	    <div class="required field">
 		<label>Product Name</label>
-		<input type="text" name="name" placeholder="Name">
+		<input type="text" name="name" placeholder="Name" value="{{ product.name }}">
 	    </div>
 	    <div class="required field">
 		<label>Version</label>
-		<input type="text" name="version" placeholder="Version">
+		<input type="text" name="version" placeholder="Version" value="{{ product.version }}">
 	    </div>
 	    <div class="field">
 		<label>Owner</label>
-		<input type="text" name="owner" placeholder="Owner">
+		<input type="text" name="owner" placeholder="Owner" value="{{ product.owner }}">
 	    </div>
 	</div>
 	<div class="fields">
 	    <div class="field">
 		<label>License</label>
 		<select name="license" class="ui search selection dropdown">
-		    <option value="">License</option>
+		    <option value="{{ product.license.full_name }}">{{ product.license.full_name or 'License' }}</option>
 		    {% for license in licenses %}
 		    <option class="item" value="{{ license.full_name }}"> {{ license.full_name }} </option>
 		    {% endfor %}
@@ -114,7 +114,7 @@ $(document).ready(function() {
 	    </div>
 	    <div class="field">
 		<label>Approver</label>
-		<input type="text" name="approver" placeholder="Approver">
+		<input type="text" name="approver" placeholder="Approver" value="{{ product.approver }}">
 	    </div>
 	</div>
 	<div class="fields ui calender" id="approval_date">
@@ -122,11 +122,76 @@ $(document).ready(function() {
 		<label>Approval Date</label>
 		<div class="ui input left icon">
 		    <i class="calendar icon"></i>
-		    <input type="text" name="approval_date" placeholder="Date">
+		    <input type="text" name="approval_date" placeholder="Date" value={{ product.approval_date if product.approval_date }}>
 		</div>
 	    </div>
 	</div>
+	<div id="selections">
+	{% if product.component_conn %}
+	{% for conn in product.component_conn %}
+	<div class="input-group" id="selection">
+	    <div class="fields">
+		<div class="field">
+		    <label>Component</label>
+		    <select id="component" name="component-{{ loop.index0 }}" class="ui search selection dropdown">
+			<option value="{{ conn.component.name or '' }}">{{ conn.component.name or 'Component' }}</option>
+			{% for component in components %}
+			<option class="item" value="{{ component.name }}"> {{ component.name }} </option>
+			{% endfor %}
+		    </select>
+		</div>
+		<div class="field">
+		    <label>Relation</label>
+		    <select id="relation" name="relation-{{ loop.index0 }}" class="ui search selection dropdown">
+			<option value="{{ conn.relation or '' }}">{{ conn.relation or 'Relation' }}</option>
+			{% for relation in relations %}
+			<option class="item" value="{{ relation }}"> {{ relation }} </option>
+			{% endfor %}
+		    </select>
+		</div>
+		<div class="field">
+		    <label>Delivery</label>
+		    <select id="delivery" name="delivery-{{ loop.index0 }}" class="ui search selection dropdown">
+			<option value="{{ conn.delivery or '' }}">{{ conn.delivery or 'Delivery' }}</option>
+			{% for delivery in valid_delivery %}
+			<option class="item" value="{{ delivery }}"> {{ delivery }} </option>
+			{% endfor %}
+		    </select>
+		</div>
+	    </div>
+	    <div class="ui grid">
+		<div class="eight wide column">
+		    <div class="grouped fields">
+			<label>Modification</label>
+			<div class="field">
+			    <div class="ui radio checkbox">
+				<input type="radio" id="modification" name="modification-{{ loop.index0 }}" value="true" {{ "checked=checked" if conn.modification == true }}>
+				<label>True</label>
+			    </div>
+			</div>
+			<div class="field">
+			    <div class="ui radio checkbox">
+				<input type="radio" id="modification" name="modification-{{ loop.index0 }}" value="false" {{ "checked=checked" if conn.modification == false }}>
+				<label>False</label>
+			    </div>
+			</div>
+		    </div>
+		</div>
+		<div class="eight wide column">
+		    <div class="grouped fields">
+			<div class="ui icon button">
+			    <i class="edit icon"></i>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <br />
+	</div>
+	{% endfor %}
+	{% else %}
 	{% include 'product-component-relation.html' %}
+	{% endif %}
+	</div>
 	<button class="ui primary button" type="submit">Save</button>
     </form>
     {% endblock %}

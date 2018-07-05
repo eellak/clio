@@ -252,7 +252,7 @@ def create_product():
         p = Product(name, version, owner, approver, approval_date)
         p.license = l
         db.session.add(p)
-        component_info = (make_component_info(request.form))
+        component_info = make_component_info(request.form)
 
         for info in component_info:
             c = Component.query.filter_by(name=info[0]).first()
@@ -271,6 +271,62 @@ def create_product():
     components = Component.query.all()
     licenses = License.query.all()
     return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
+
+
+@app.route('/product/update/', methods=['GET', 'POST'])
+def update_product():
+    if request.method == 'POST':
+        product_name = request.form['product']
+        product = Product.query.filter_by(name=product_name).first()
+        if(product):
+            return redirect(url_for('update_product_info', id=product.id))
+    products = Product.query.all()
+    return render_template('update-product.html', products=products)
+
+
+@app.route('/product/update/<int:id>', methods=['GET', 'POST'])
+def update_product_info(id):
+    if request.method == 'POST':
+        name = request.form['name']
+        version = request.form['version']
+        owner = request.form['owner']
+        license = request.form['license']
+        approver = request.form['approver']
+        approval_date = get_date(request.form['approval_date'])
+
+        l = License.query.filter_by(full_name=license).first()
+        p = Product.query.filter_by(id=id).first()
+        if(p):
+            p.name = name
+            p.version = version
+            p.owner = owner
+            p.approver = approver
+            p.approval_date = approval_date
+            p.license = l
+            db.session.add(p)
+
+            component_info = make_component_info(request.form)
+
+            Product_Component_conn.query.filter_by(product_id=p.id).delete()
+
+            for info in component_info:
+                c = Component.query.filter_by(name=info[0]).first()
+                if(c):
+                    modification = set_boolean_value(info[3])
+                    pc = Product_Component_conn(p, c, info[1], modification, info[2])
+                    db.session.add(pc)
+
+            try:
+                db.session.commit()
+                flash('Product updated successfully', 'success')
+            except:
+                db.session.rollback()
+                flash('Please try again', 'error')
+
+    product = Product.query.filter_by(id=id).first()
+    components = Component.query.all()
+    licenses = License.query.all()
+    return render_template('update-product-info.html', product=product, relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
 
 
 @app.errorhandler(404)

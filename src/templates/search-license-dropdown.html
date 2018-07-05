@@ -6,7 +6,7 @@
 -->
 
 <style>
-.ui.search.dropdown.selection {
+.ui.search.dropdown.license {
     float: right;
     margin-top: -30px;
 }
@@ -26,7 +26,7 @@ window.onload = function () {
 </script>
 
 <div>
-    <select id="select-license" class="ui search dropdown">
+    <select id="select-license" class="ui search dropdown license">
 	<option value="">Search License</option>
 	{% for license in licenses %}
 	<option value="{{ license.id }}">{{ license.full_name }}</option>

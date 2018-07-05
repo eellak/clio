@@ -1,0 +1,60 @@
+<div id="selections">
+    <div class="input-group" id="selection">
+	<div class="fields">
+	    <div class="field">
+		<label>Component</label>
+		<select id="component" name="component-0" class="ui search selection dropdown">
+		    <option value="">Component</option>
+		    {% for component in components %}
+		    <option class="item" value="{{ component.name }}"> {{ component.name }} </option>
+		    {% endfor %}
+		</select>
+	    </div>
+	    <div class="field">
+		<label>Relation</label>
+		<select id="relation" name="relation-0" class="ui search selection dropdown">
+		    <option value="">Relation</option>
+		    {% for relation in relations %}
+		    <option class="item" value="{{ relation }}"> {{ relation }} </option>
+		    {% endfor %}
+		</select>
+	    </div>
+	    <div class="field">
+		<label>Delivery</label>
+		<select id="delivery" name="delivery-0" class="ui search selection dropdown">
+		    <option value="">Delivery</option>
+		    {% for delivery in valid_delivery %}
+		    <option class="item" value="{{ delivery }}"> {{ delivery }} </option>
+		    {% endfor %}
+		</select>
+	    </div>
+	</div>
+	<div class="ui grid">
+	    <div class="eight wide column">
+		<div class="grouped fields">
+		    <label>Modification</label>
+		    <div class="field">
+			<div class="ui radio checkbox">
+			    <input type="radio" id="modification" name="modification-0" value="true">
+			    <label>True</label>
+			</div>
+		    </div>
+		    <div class="field">
+			<div class="ui radio checkbox">
+			    <input type="radio" id="modification" name="modification-0" value="false">
+			    <label>False</label>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="eight wide column">
+		<div class="grouped fields">
+		    <div class="ui icon button">
+			<i class="edit icon"></i>
+		    </div>
+		</div>
+	    </div>
+	</div>
+	<br />
+    </div>
+</div>
