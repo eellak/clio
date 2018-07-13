@@ -11,10 +11,22 @@
     <link rel="stylesheet" type="text/css" href="/static/dataTables.semanticui.min.css">
     <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/static/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="/static/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="/static/buttons.semanticui.min.js"></script>
+    <script type="text/javascript" src="/static/jszip.min.js"></script>
+    <script type="text/javascript" src="/static/pdfmake.min.js"></script>
+    <script type="text/javascript" src="/static/vfs_fonts.js"></script>
+    <script type="text/javascript" src="/static/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="/static/buttons.print.min.js"></script>
     <script>
     $(document).ready(function() {
 	$("#a-product").addClass("active")
-        $("#product").DataTable();
+	var table = $("#product").DataTable( {
+	    lengthChange: false,
+	    buttons: ['copy', 'excel', 'pdf', 'print'],
+	} );
+	table.buttons().container()
+	    .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
     } );
     </script>
 
