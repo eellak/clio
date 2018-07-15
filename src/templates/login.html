@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+<!-- 
+    Copyright (C) 2018 Gopalakrishnan
+
+    SPDX-License-Identifier: GPL-3.0-or-later
+    See GPL-3.0-or-later in the Licenses folder for license information
+-->
+
+{% block content %}
+<script>
+$(document).ready(function() {
+    $('.ui.form')
+	.form({
+	    fields: {
+		username : 'empty',
+		password : 'empty',
+	    }
+	})
+    ;
+});
+</script>
+<style>
+.ui.main.container {
+    margin-top: 30px !important;
+}
+</style>
+<div class="ui main container middle aligned center aligned grid">
+    <div class="column">
+	<h1 class="ui header">
+	    Log-in to your account
+	</h1>
+	<form class="ui form" action={{ url_for("login") }} method="post">
+	    <div class="ui stacked segment">
+		<div class="field">
+		    <div class="ui left icon input">
+			<i class="user icon"></i>
+			<input type="text" name="username" placeholder="Username">
+		    </div>
+		</div>
+		<div class="field">
+		    <div class="ui left icon input">
+			<i class="lock icon"></i>
+			<input type="password" name="password" placeholder="Password">
+		    </div>
+		</div>
+		<button class="ui fluid submit primary button" type="submit">Login</button>
+	    </div>
+	</form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}
