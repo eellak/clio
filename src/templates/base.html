@@ -48,6 +48,16 @@
 			    <a class="item" href="/product/update">Product</a>
 			</div>
 		    </div>
+		    {% if session['user_id'] %}
+		    <div class="ui dropdown item">
+			<i class="user outline icon"></i>{{ session['user_id'] }}
+			<div class="menu">
+			    <a class="item" href="/logout">Logout</a>
+			</div>
+		    </div>
+		    {% else %}
+		    <a class="ui item" href="/login">Login</a>
+		    {% endif %}
 		</div>
 	    </div>
 	</div>

@@ -31,3 +31,11 @@ CSRF_SESSION_KEY = 'secret'
 
 # Secret key for signing cookies
 SECRET_KEY = 'secret'
+
+# LDAP Configuration
+LDAP_OPENLDAP = True
+LDAP_HOST = 'localhost'
+LDAP_BASE_DN = 'dc=example,dc=com'
+LDAP_USERNAME = 'cn=admin,dc=example,dc=com'
+LDAP_PASSWORD = 'root'
+LDAP_USER_OBJECT_FILTER = '(&(objectclass=inetOrgPerson)(uid=%s))'

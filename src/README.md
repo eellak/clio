@@ -61,17 +61,21 @@ user=> \q
 ```
 Update the `SQLALCHEMY_DATABASE_URI` in `config.py`  
 
-* **Step 3** - Create the tables.
+* **Step 3** - LDAP Configuration
+
+Update the LDAP credentials in `config.py`
+
+* **Step 4** - Create the tables.
 ```
 $ python3 manage.py db init
 $ python3 manage.py db migrate
 $ python3 manage.py db upgrade
 ```
 
-* **Step 4** - Start the application along with the needed services.
+* **Step 5** - Start the application along with the needed services.
 ```
 # To run
 $ python3 app.py
 ```
 
-* **Step 5** - Go to `localhost:5000` in your web browser to see the application live.
+* **Step 6** - Go to `localhost:5000` in your web browser to see the application live.

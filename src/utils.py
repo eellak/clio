@@ -5,6 +5,7 @@
 # See GPL-3.0-or-later in the Licenses folder for license information
 # -------------------------------------------------------------------
 
+
 def set_boolean_value(status):
     val = None
     if status == 'true':
@@ -40,3 +41,28 @@ def make_component_info(data):
         component_info.append(tuple(comp))
         index += 1
     return tuple(component_info)
+
+
+# This patch is borrowed from https://github.com/admiralobvious/flask-simpleldap/issues/44
+def _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(ldap_instance):
+    import ldap
+
+    def bind_user(self, username, password):
+        user_dn = self.get_object_details(user=username, dn_only=True)
+
+        if user_dn is None:
+            return
+        try:
+            if type(user_dn) == bytes:
+                user_dn = user_dn.decode('utf-8')
+
+            conn = self.initialize
+            conn.simple_bind_s(user_dn, password)
+            return True
+        except ldap.LDAPError:
+            return
+
+    import types
+    ldap_instance.bind_user = types.MethodType(bind_user, ldap_instance)
+
+    return ldap_instance
