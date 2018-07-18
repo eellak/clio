@@ -360,6 +360,7 @@ def login():
         if test is not None:
             session['user_id'] = request.form['username']
             return redirect(url_for('home'))
+        flash('Invalid username or password', 'error')
     return render_template('login.html')
 
 

@@ -24,29 +24,41 @@ $(document).ready(function() {
     margin-top: 30px !important;
 }
 </style>
-<div class="ui main container middle aligned center aligned grid">
-    <div class="column">
-	<h1 class="ui header">
-	    Log-in to your account
-	</h1>
-	<form class="ui form" action={{ url_for("login") }} method="post">
-	    <div class="ui stacked segment">
-		<div class="field">
-		    <div class="ui left icon input">
-			<i class="user icon"></i>
-			<input type="text" name="username" placeholder="Username">
-		    </div>
-		</div>
-		<div class="field">
-		    <div class="ui left icon input">
-			<i class="lock icon"></i>
-			<input type="password" name="password" placeholder="Password">
-		    </div>
-		</div>
-		<button class="ui fluid submit primary button" type="submit">Login</button>
-	    </div>
-	</form>
+<div class="ui main container">
+    {% with errors = get_flashed_messages(category_filter=['error']) %}
+    {% if(errors) %}
+    <div class="ui error message">
+	<div class="header">
+	    There where some errors with your submission
+	</div>
+	<ul>
+	    {% for error in errors %}
+	    <li> {{ error }} </li>
+	    {% endfor %}
+	</ul>
     </div>
+    {% endif %}
+    {% endwith %}
+    <h1 class="ui header" align="center">
+	Log-in to your account
+    </h1>
+    <form class="ui form" action={{ url_for("login") }} method="post">
+	<div class="ui stacked segment">
+	    <div class="field">
+		<div class="ui left icon input">
+		    <i class="user icon"></i>
+		    <input type="text" name="username" placeholder="Username">
+		</div>
+	    </div>
+	    <div class="field">
+		<div class="ui left icon input">
+		    <i class="lock icon"></i>
+		    <input type="password" name="password" placeholder="Password">
+		</div>
+	    </div>
+	    <button class="ui fluid submit primary button" type="submit">Login</button>
+	</div>
+    </form>
 </div>
 </body>
 </html>
