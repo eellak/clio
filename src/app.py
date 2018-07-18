@@ -5,8 +5,9 @@
 # See GPL-3.0-or-later in the Licenses folder for license information
 # -------------------------------------------------------------------
 
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, g, render_template, request, flash, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_simpleldap import LDAP
 
 # Flask Initialization
 app = Flask(__name__)
@@ -19,7 +20,16 @@ db = SQLAlchemy(app)
 
 from models import *
 from specification import *
-from utils import set_boolean_value, make_component_info
+from utils import set_boolean_value, make_component_info, _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44
+
+ldap = _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(LDAP(app))
+
+
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user_id' in session:
+        g.user = {}
 
 
 @app.route('/')
@@ -65,6 +75,7 @@ def product_info(id):
 
 
 @app.route('/component/create/', methods=['GET', 'POST'])
+@ldap.login_required
 def create_component():
     if request.method == 'POST':
         name = request.form['name']
@@ -99,10 +110,11 @@ def create_component():
 
     components = Component.query.all()
     licenses = License.query.all()
-    return render_template('create-component.html', components=components, licenses=licenses)
+    return render_template('create-component.html', components=components, licenses=licenses, username=session['user_id'])
 
 
 @app.route('/component/update/', methods=['GET', 'POST'])
+@ldap.login_required
 def update_component():
     if request.method == 'POST':
         component_name = request.form['component']
@@ -114,6 +126,7 @@ def update_component():
 
 
 @app.route('/component/update/<int:id>', methods=['GET', 'POST'])
+@ldap.login_required
 def update_component_info(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -169,6 +182,7 @@ def update_component_info(id):
 
 
 @app.route('/license/create/', methods=['GET', 'POST'])
+@ldap.login_required
 def create_license():
     if request.method == 'POST':
         full_name = request.form['full_name']
@@ -195,6 +209,7 @@ def create_license():
 
 
 @app.route('/license/update/', methods=['GET', 'POST'])
+@ldap.login_required
 def update_license():
     if request.method == 'POST':
         license_full_name = request.form['license']
@@ -206,6 +221,7 @@ def update_license():
 
 
 @app.route('/license/update/<int:id>', methods=['GET', 'POST'])
+@ldap.login_required
 def update_license_info(id):
     if request.method == 'POST':
         full_name = request.form['full_name']
@@ -239,6 +255,7 @@ def update_license_info(id):
 
 
 @app.route('/product/create/', methods=['GET', 'POST'])
+@ldap.login_required
 def create_product():
     if request.method == 'POST':
         name = request.form['name']
@@ -274,6 +291,7 @@ def create_product():
 
 
 @app.route('/product/update/', methods=['GET', 'POST'])
+@ldap.login_required
 def update_product():
     if request.method == 'POST':
         product_name = request.form['product']
@@ -285,6 +303,7 @@ def update_product():
 
 
 @app.route('/product/update/<int:id>', methods=['GET', 'POST'])
+@ldap.login_required
 def update_product_info(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -313,7 +332,8 @@ def update_product_info(id):
                 c = Component.query.filter_by(name=info[0]).first()
                 if(c):
                     modification = set_boolean_value(info[3])
-                    pc = Product_Component_conn(p, c, info[1], modification, info[2])
+                    pc = Product_Component_conn(
+                        p, c, info[1], modification, info[2])
                     db.session.add(pc)
 
             try:
@@ -327,6 +347,27 @@ def update_product_info(id):
     components = Component.query.all()
     licenses = License.query.all()
     return render_template('update-product-info.html', product=product, relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
+
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if g.user:
+        return redirect(url_for('home'))
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        test = ldap.bind_user(username, password)
+        if test is not None:
+            session['user_id'] = request.form['username']
+            return redirect(url_for('home'))
+        flash('Invalid username or password', 'error')
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home'))
 
 
 @app.errorhandler(404)
