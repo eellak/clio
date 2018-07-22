@@ -30,6 +30,11 @@ def before_request():
     g.user = None
     if 'user_id' in session:
         g.user = {}
+        groups = ldap.get_user_groups(user=session['user_id'])
+        if groups:
+            g.ldap_groups = groups
+        else:
+            g.ldap_groups = list()
 
 
 @app.route('/')
@@ -75,7 +80,7 @@ def product_info(id):
 
 
 @app.route('/component/create/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def create_component():
     if request.method == 'POST':
         name = request.form['name']
@@ -114,7 +119,7 @@ def create_component():
 
 
 @app.route('/component/update/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_component():
     if request.method == 'POST':
         component_name = request.form['component']
@@ -126,7 +131,7 @@ def update_component():
 
 
 @app.route('/component/update/<int:id>', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_component_info(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -182,7 +187,7 @@ def update_component_info(id):
 
 
 @app.route('/license/create/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def create_license():
     if request.method == 'POST':
         full_name = request.form['full_name']
@@ -209,7 +214,7 @@ def create_license():
 
 
 @app.route('/license/update/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_license():
     if request.method == 'POST':
         license_full_name = request.form['license']
@@ -221,7 +226,7 @@ def update_license():
 
 
 @app.route('/license/update/<int:id>', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_license_info(id):
     if request.method == 'POST':
         full_name = request.form['full_name']
@@ -255,7 +260,7 @@ def update_license_info(id):
 
 
 @app.route('/product/create/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def create_product():
     if request.method == 'POST':
         name = request.form['name']
@@ -291,7 +296,7 @@ def create_product():
 
 
 @app.route('/product/update/', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_product():
     if request.method == 'POST':
         product_name = request.form['product']
@@ -303,7 +308,7 @@ def update_product():
 
 
 @app.route('/product/update/<int:id>', methods=['GET', 'POST'])
-@ldap.login_required
+@ldap.group_required(groups=['ldapgroup'])
 def update_product_info(id):
     if request.method == 'POST':
         name = request.form['name']

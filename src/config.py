@@ -39,3 +39,8 @@ LDAP_BASE_DN = 'dc=example,dc=com'
 LDAP_USERNAME = 'cn=admin,dc=example,dc=com'
 LDAP_PASSWORD = 'root'
 LDAP_USER_OBJECT_FILTER = '(&(objectclass=inetOrgPerson)(uid=%s))'
+
+LDAP_GROUP_MEMBERS_FIELD = 'member'
+LDAP_GROUP_OBJECT_FILTER = '(&(objectclass=groupOfNames)(member=%s))'
+LDAP_GROUP_MEMBER_FILTER = '(&(cn=*)(objectclass=groupOfNames)(member=%s))'
+LDAP_GROUP_MEMBER_FILTER_FIELD = 'cn'
