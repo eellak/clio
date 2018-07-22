@@ -44,3 +44,5 @@ LDAP_GROUP_MEMBERS_FIELD = 'member'
 LDAP_GROUP_OBJECT_FILTER = '(&(objectclass=groupOfNames)(member=%s))'
 LDAP_GROUP_MEMBER_FILTER = '(&(cn=*)(objectclass=groupOfNames)(member=%s))'
 LDAP_GROUP_MEMBER_FILTER_FIELD = 'cn'
+
+GROUP_NAME = 'ldapgroup'
