@@ -5,7 +5,10 @@
 # See GPL-3.0-or-later in the Licenses folder for license information
 # -------------------------------------------------------------------
 
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+
+# Create an instance of SQLAlchemy
+db = SQLAlchemy()
 
 
 # Middle table that connects two components

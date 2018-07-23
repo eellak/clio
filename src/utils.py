@@ -5,6 +5,10 @@
 # See GPL-3.0-or-later in the Licenses folder for license information
 # -------------------------------------------------------------------
 
+from functools import wraps
+from flask import g, session, abort
+from models import *
+
 
 def set_boolean_value(status):
     val = None
@@ -66,3 +70,20 @@ def _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(ldap_instance)
     ldap_instance.bind_user = types.MethodType(bind_user, ldap_instance)
 
     return ldap_instance
+
+
+def owner_or_group_required(groups=None):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if g.user is None:
+                return redirect(url_for(app.config['LDAP_LOGIN_VIEW'], next=request.path))
+            match = [group for group in groups if group in g.ldap_groups]
+            product_id = kwargs['id']
+            product = Product.query.filter_by(id=product_id).first()
+            owner = product.owner
+            if not match and session['user_id'] != owner:
+                abort(401)
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
