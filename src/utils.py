@@ -6,7 +6,7 @@
 # -------------------------------------------------------------------
 
 from functools import wraps
-from flask import g, session, abort
+from flask import g, session, abort, redirect, url_for, current_app, request
 from models import *
 
 
@@ -77,7 +77,7 @@ def owner_or_group_required(groups=None):
         @wraps(f)
         def wrapped(*args, **kwargs):
             if g.user is None:
-                return redirect(url_for(app.config['LDAP_LOGIN_VIEW'], next=request.path))
+                return redirect(url_for(current_app.config['LDAP_LOGIN_VIEW'], next=request.path))
             match = [group for group in groups if group in g.ldap_groups]
             product_id = kwargs['id']
             product = Product.query.filter_by(id=product_id).first()
