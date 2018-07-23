@@ -292,7 +292,7 @@ def create_product():
 
     components = Component.query.all()
     licenses = License.query.all()
-    return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
+    return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components, owner=session['user_id'])
 
 
 @app.route('/product/update/', methods=['GET', 'POST'])
