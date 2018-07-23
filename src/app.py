@@ -29,7 +29,7 @@ ldap = _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(LDAP(app))
 def before_request():
     g.user = None
     if 'user_id' in session:
-        g.user = {}
+        g.user = ldap.get_object_details(user=session['user_id'])
         groups = ldap.get_user_groups(user=session['user_id'])
         if groups:
             g.ldap_groups = groups
