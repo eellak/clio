@@ -6,7 +6,6 @@
 # -------------------------------------------------------------------
 
 from flask import Flask, g, render_template, request, flash, redirect, url_for, session
-from flask_sqlalchemy import SQLAlchemy
 from flask_simpleldap import LDAP
 
 # Flask Initialization
@@ -16,12 +15,12 @@ app = Flask(__name__)
 app.config.from_object('config')
 group = app.config['GROUP_NAME']
 
-# Create an instance of SQLAlchemy
-db = SQLAlchemy(app)
+from models import db
+db.init_app(app)
 
 from models import *
 from specification import *
-from utils import set_boolean_value, make_component_info, _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44
+from utils import set_boolean_value, make_component_info, _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44, owner_or_group_required
 
 ldap = _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(LDAP(app))
 
@@ -30,7 +29,7 @@ ldap = _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(LDAP(app))
 def before_request():
     g.user = None
     if 'user_id' in session:
-        g.user = {}
+        g.user = ldap.get_object_details(user=session['user_id'])
         groups = ldap.get_user_groups(user=session['user_id'])
         if groups:
             g.ldap_groups = groups
@@ -120,7 +119,7 @@ def create_component():
 
 
 @app.route('/component/update/', methods=['GET', 'POST'])
-@ldap.group_required(groups=[group])
+@ldap.login_required
 def update_component():
     if request.method == 'POST':
         component_name = request.form['component']
@@ -215,7 +214,7 @@ def create_license():
 
 
 @app.route('/license/update/', methods=['GET', 'POST'])
-@ldap.group_required(groups=[group])
+@ldap.login_required
 def update_license():
     if request.method == 'POST':
         license_full_name = request.form['license']
@@ -261,7 +260,7 @@ def update_license_info(id):
 
 
 @app.route('/product/create/', methods=['GET', 'POST'])
-@ldap.group_required(groups=[group])
+@ldap.login_required
 def create_product():
     if request.method == 'POST':
         name = request.form['name']
@@ -293,11 +292,11 @@ def create_product():
 
     components = Component.query.all()
     licenses = License.query.all()
-    return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components)
+    return render_template('create-product.html', relations=valid_relationship, valid_delivery=valid_delivery, licenses=licenses, components=components, owner=session['user_id'])
 
 
 @app.route('/product/update/', methods=['GET', 'POST'])
-@ldap.group_required(groups=[group])
+@ldap.login_required
 def update_product():
     if request.method == 'POST':
         product_name = request.form['product']
@@ -309,7 +308,7 @@ def update_product():
 
 
 @app.route('/product/update/<int:id>', methods=['GET', 'POST'])
-@ldap.group_required(groups=[group])
+@owner_or_group_required(groups=[group])
 def update_product_info(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -381,11 +380,16 @@ def not_found_error(error):
     return render_template('404.html'), 404
 
 
+@app.errorhandler(401)
+def unauthorized_error(error):
+    return render_template('401.html'), 401
+
+
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0')
