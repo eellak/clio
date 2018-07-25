@@ -8,27 +8,18 @@
 
 {% block content %}
 <div class="ui main container">
-    <link rel="stylesheet" type="text/css" href="/static/dataTables.semanticui.min.css">
-    <script type="text/javascript" src="/static/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/static/dataTables.semanticui.min.js"></script>
-    <script type="text/javascript" src="/static/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="/static/buttons.semanticui.min.js"></script>
-    <script type="text/javascript" src="/static/jszip.min.js"></script>
-    <script type="text/javascript" src="/static/pdfmake.min.js"></script>
-    <script type="text/javascript" src="/static/vfs_fonts.js"></script>
-    <script type="text/javascript" src="/static/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="/static/buttons.print.min.js"></script>
-    <script>
-    $(document).ready(function() {
-	$("#a-license").addClass("active")
-	var table = $("#license").DataTable( {
-	    lengthChange: false,
-	    buttons: ['copy', 'excel', 'pdf', 'print'],
-	} );
-	table.buttons().container()
-	    .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
-    } );
-    </script>
+    <link rel="stylesheet" type="text/css" href="/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/buttons.semanticui.min.css">
+    <script type="text/javascript" src="/static/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="/static/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="/static/js/buttons.semanticui.min.js"></script>
+    <script type="text/javascript" src="/static/js/jszip.min.js"></script>
+    <script type="text/javascript" src="/static/js/pdfmake.min.js"></script>
+    <script type="text/javascript" src="/static/js/vfs_fonts.js"></script>
+    <script type="text/javascript" src="/static/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="/static/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="/static/js/license.js"></script>
     <table id="license" class="ui celled table" style="width:100%">
 	<thead>
 	    <tr>

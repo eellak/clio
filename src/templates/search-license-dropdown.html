@@ -5,26 +5,8 @@
     See GPL-3.0-or-later in the Licenses folder for license information
 -->
 
-<style>
-.ui.search.dropdown.license {
-    float: right;
-    margin-top: -30px;
-}
-.ui.error.message, .ui.success.message {
-    margin-bottom: 50px;
-}
-</style>
-
-<script>
-window.onload = function () {
-    var select_license = document.getElementById('select-license');
-    select_license.onchange = function () {
-	var id = select_license.options[select_license.selectedIndex].value;
-	window.location.href = '/license/' + id;
-    }
-}
-</script>
-
+<link rel="stylesheet" type="text/css" href="/static/css/search-license-dropdown.css">
+<script type="text/javascript" src="/static/js/search-license-dropdown.js"></script>
 <div>
     <select id="select-license" class="ui search dropdown license">
 	<option value="">Search License</option>

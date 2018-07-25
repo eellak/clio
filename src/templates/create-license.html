@@ -7,28 +7,8 @@
 -->
 
 {% block content %}
-<style>
-.ui.main.container {
-    margin-top: 50px !important;
-}
-.ui.dividing.header {
-    margin-top: 30px !important;
-    margin-bottom: 30px !important;
-}
-</style>
-<script>
-$(document).ready(function() {
-    $('.ui.radio.checkbox').checkbox();
-    $('.ui.form')
-	.form({
-	    fields: {
-		full_name  : 'empty',
-		identifier : 'empty',
-	    }
-	})
-    ;
-});
-</script>
+<link rel="stylesheet" type="text/css" href="/static/css/create-license.css">
+<script type="text/javascript" src="/static/js/create-license.js"></script>
 <div class="ui main container">
     {% with errors = get_flashed_messages(category_filter=['error']) %}
     {% if(errors) %}

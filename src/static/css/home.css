@@ -1,0 +1,17 @@
+/*
+    Copyright (C) 2018 Gopalakrishnan
+
+    SPDX-License-Identifier: GPL-3.0-or-later
+    See GPL-3.0-or-later in the Licenses folder for license information
+*/
+
+.ui.segment.inverted {
+    margin-bottom: 100px !important;
+}
+.ui.huge.primary.button {
+    margin-bottom: 100px !important;
+}
+h2 {
+    margin: 0 0 50px 0
+}
+

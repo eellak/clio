@@ -8,37 +8,15 @@
 
 {% block content %}
 
-<link href="/static/calendar.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/static/calendar.min.js"></script>
-
+<link href="/static/css/calendar.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/calendar.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/update-component-info.css">
 <script>
 $(document).ready(function() {
-    $('#pub_date').calendar({
-	type: 'date', 
-	maxDate: new Date()
-    });
     $('.ui.fluid.dropdown').dropdown('set selected', {{ selected_components|tojson }});
-    $('.ui.form')
-	.form({
-	    fields: {
-		name     : 'empty',
-		version  : 'empty',
-	    }
-	})
-    ;
 });
 </script>
-
-<style>
-.ui.main.container {
-    margin-top: 50px !important;
-}
-.ui.dividing.header {
-    margin-top: 30px !important;
-    margin-bottom: 30px !important;
-}
-</style>
-
+<script type="text/javascript" src="/static/js/update-component-info.js"></script>
 <div class="ui main container">
     {% with errors = get_flashed_messages(category_filter=['error']) %}
     {% if(errors) %}

@@ -7,58 +7,10 @@
 -->
 
 {% block content %}
-
-<link href="/static/calendar.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/static/calendar.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#approval_date').calendar({
-	type: 'date', 
-	maxDate: new Date()
-    });
-    $('.ui.dropdown').dropdown();
-    $('.ui.form')
-	.form({
-	    fields: {
-		name     : 'empty',
-		version  : 'empty',
-	    }
-	})
-    ;
-    $(function() {
-	$("body").on("click", ".ui.icon.button", function() {
-	    var length = $(".input-group").length;
-	    var clone = $("#selection").clone();
-	    clone.find("select#component").attr("name", "component-"+length);
-	    clone.find("select#relation").attr("name", "relation-"+length);
-	    clone.find("select#delivery").attr("name", "delivery-"+length);
-	    clone.find("input#modification").attr("name", "modification-"+length);
-	    clone.find(".ui.dropdown").dropdown('clear');
-	    clone.find(".ui.checkbox").checkbox('uncheck');
-	    $("#selections").append(clone);
-	});
-    });
-});
-</script>
-
-<style>
-.ui.main.container {
-    margin-top: 50px !important;
-}
-.ui.dividing.header {
-    margin-top: 30px !important;
-    margin-bottom: 30px !important;
-}
-.ui.icon.button {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-.ui.primary.button {
-    margin-bottom: 10px !important;
-}
-</style>
+<link href="/static/css/calendar.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/calendar.min.js"></script>
+<script type="text/javascript" src="/static/js/create-product.js"></script>
+<link href="/static/css/create-product.css" rel="stylesheet" type="text/css" />
 <div class="ui main container">
     {% with errors = get_flashed_messages(category_filter=['error']) %}
     {% if(errors) %}
