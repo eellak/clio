@@ -10,31 +10,8 @@
 <div class="ui main container">
     <link rel="stylesheet" type="text/css" href="/static/css/update-license-info.css">
     <script type="text/javascript" src="/static/js/update-license-info.js"></script>
-    {% with errors = get_flashed_messages(category_filter=['error']) %}
-    {% if(errors) %}
-    <div class="ui error message">
-	<div class="header">
-	    There where some errors with your submission
-	</div>
-	<ul>
-	    {% for error in errors %}
-	    <li> {{ error }} </li>
-	    {% endfor %}
-	</ul>
-    </div>
-    {% endif %}
-    {% endwith %}
-    {% with success_messages = get_flashed_messages(category_filter=['success']) %}
-    {% if(success_messages) %}
-    {% for success_message in success_messages %}
-    <div class="ui success message">
-	<div class="header">
-	    {{ success_message }} 
-	</div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    {% include 'error.html' %}
+    {% include 'success.html' %}
     <form class="ui equal width form" action={{ url_for("update_license_info", id=license.id) }} method="post">
 	<h4 class="ui dividing header">Update License : <a href={{ url_for("license_info", id=license.id) }}>#{{ license.id }}</a> </h4>
 	<div class="fields">

@@ -1,0 +1,18 @@
+<!-- 
+    Copyright (C) 2018 Gopalakrishnan
+
+    SPDX-License-Identifier: GPL-3.0-or-later
+    See GPL-3.0-or-later in the Licenses folder for license information
+-->
+
+{% with success_messages = get_flashed_messages(category_filter=['success']) %}
+{% if(success_messages) %}
+{% for success_message in success_messages %}
+<div class="ui success message">
+    <div class="header">
+	{{ success_message }} 
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}

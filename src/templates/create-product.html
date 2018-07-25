@@ -12,31 +12,8 @@
 <script type="text/javascript" src="/static/js/create-product.js"></script>
 <link href="/static/css/create-product.css" rel="stylesheet" type="text/css" />
 <div class="ui main container">
-    {% with errors = get_flashed_messages(category_filter=['error']) %}
-    {% if(errors) %}
-    <div class="ui error message">
-	<div class="header">
-	    There where some errors with your submission
-	</div>
-	<ul>
-	    {% for error in errors %}
-	    <li> {{ error }} </li>
-	    {% endfor %}
-	</ul>
-    </div>
-    {% endif %}
-    {% endwith %}
-    {% with success_messages = get_flashed_messages(category_filter=['success']) %}
-    {% if(success_messages) %}
-    {% for success_message in success_messages %}
-    <div class="ui success message">
-	<div class="header">
-	    {{ success_message }} 
-	</div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    {% include 'error.html' %}
+    {% include 'success.html' %}
     {% include 'search-license-dropdown.html' %}
     <form class="ui equal width form" action={{ url_for("create_product") }} method="post">
 	<h4 class="ui dividing header">Create Product</h4>

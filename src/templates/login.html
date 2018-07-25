@@ -10,20 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 <script type="text/javascript" src="/static/js/login.js"></script>
 <div class="ui main container">
-    {% with errors = get_flashed_messages(category_filter=['error']) %}
-    {% if(errors) %}
-    <div class="ui error message">
-	<div class="header">
-	    There where some errors with your submission
-	</div>
-	<ul>
-	    {% for error in errors %}
-	    <li> {{ error }} </li>
-	    {% endfor %}
-	</ul>
-    </div>
-    {% endif %}
-    {% endwith %}
+    {% include 'error.html' %}
     <h1 class="ui header" align="center">
 	Log-in to your account
     </h1>
