@@ -7,68 +7,13 @@
 -->
 
 {% block content %}
-
-<link href="/static/calendar.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/static/calendar.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#pub_date').calendar({
-	type: 'date', 
-	maxDate: new Date()
-    });
-    $('.ui.dropdown').dropdown({
-	forceSelection: false, 
-	selectOnKeydown: false, 
-	showOnFocus: false,
-	on: "hover" 
-    });
-    $('.ui.form')
-	.form({
-	    fields: {
-		name     : 'empty',
-		version  : 'empty',
-	    }
-	})
-    ;
-});
-</script>
-
-<style>
-.ui.main.container {
-    margin-top: 50px !important;
-}
-.ui.dividing.header {
-    margin-top: 30px !important;
-    margin-bottom: 30px !important;
-}
-</style>
+<link href="/static/css/calendar.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/calendar.min.js"></script>
+<script type="text/javascript" src="/static/js/create-component.js"></script>
+<link href="/static/css/create-component.css" rel="stylesheet" type="text/css" />
 <div class="ui main container">
-    {% with errors = get_flashed_messages(category_filter=['error']) %}
-    {% if(errors) %}
-    <div class="ui error message">
-	<div class="header">
-	    There where some errors with your submission
-	</div>
-	<ul>
-	    {% for error in errors %}
-	    <li> {{ error }} </li>
-	    {% endfor %}
-	</ul>
-    </div>
-    {% endif %}
-    {% endwith %}
-    {% with success_messages = get_flashed_messages(category_filter=['success']) %}
-    {% if(success_messages) %}
-    {% for success_message in success_messages %}
-    <div class="ui success message">
-	<div class="header">
-	    {{ success_message }} 
-	</div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    {% include 'error.html' %}
+    {% include 'success.html' %}
     {% include 'search-license-dropdown.html' %}
     <form class="ui equal width form" action={{ url_for("create_component") }} method="post">
 	<h4 class="ui dividing header">Create Component</h4>

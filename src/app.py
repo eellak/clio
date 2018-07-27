@@ -86,7 +86,7 @@ def create_component():
         name = request.form['name']
         version = request.form['version']
         license_expression = request.form['license_expression']
-        created_by = request.form['created_by']
+        created_by = session['user_id']
         origin = request.form['origin']
         source_url = request.form['source_url']
         ext_link = request.form['ext_link']
@@ -98,7 +98,7 @@ def create_component():
             license_expression, origin, source_url, ext_link, pub_date)
 
         if(is_valid is True):
-            c = Component(name, version, pub_date=pub_date, origin=origin,
+            c = Component(name, version, created_by=created_by, pub_date=pub_date, origin=origin,
                           source_url=source_url, license_expression=license_expression, ext_link=ext_link)
             for component_name in components:
                 comp = Component.query.filter_by(name=component_name).first()
@@ -137,7 +137,6 @@ def update_component_info(id):
         name = request.form['name']
         version = request.form['version']
         license_expression = request.form['license_expression']
-        created_by = request.form['created_by']
         origin = request.form['origin']
         source_url = request.form['source_url']
         ext_link = request.form['ext_link']
@@ -154,7 +153,6 @@ def update_component_info(id):
                 c.name = name
                 c.version = version
                 c.license_expression = license_expression
-                c.created_by = created_by
                 c.origin = origin
                 c.source_url = source_url
                 c.ext_link = ext_link
@@ -265,7 +263,7 @@ def create_product():
     if request.method == 'POST':
         name = request.form['name']
         version = request.form['version']
-        owner = request.form['owner']
+        owner = session['user_id']
         license = request.form['license']
         approver = request.form['approver']
         approval_date = get_date(request.form['approval_date'])
@@ -313,7 +311,6 @@ def update_product_info(id):
     if request.method == 'POST':
         name = request.form['name']
         version = request.form['version']
-        owner = request.form['owner']
         license = request.form['license']
         approver = request.form['approver']
         approval_date = get_date(request.form['approval_date'])
@@ -323,7 +320,6 @@ def update_product_info(id):
         if(p):
             p.name = name
             p.version = version
-            p.owner = owner
             p.approver = approver
             p.approval_date = approval_date
             p.license = l

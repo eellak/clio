@@ -65,6 +65,16 @@ def is_valid_url(url):
 
 
 def get_date(date_string):
+    """Converts given date string to YYYY-MM-DD format.
+
+    >>> get_date('July 11, 2018')
+    '2018-07-11'
+
+    :param date_string: Date string to be converted to YYYY-MM-DD format.
+    :type url: str
+    :returns: str
+
+    """
     if(date_string != ''):
         date_string = datetime.strptime(date_string, '%B %d, %Y')
         date_string = date_string.strftime('%Y-%m-%d')

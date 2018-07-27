@@ -8,12 +8,7 @@
 
 {% block content %}
 
-<style>
-.ui.main.container {
-    margin-top: 50px !important;
-}
-</style>
-
+<link rel="stylesheet" type="text/css" href="/static/css/update-product.css">
 <div class="ui main container">
     <h4 class="ui header">Select Product</h4> 
     <form class="ui equal width form" action={{ url_for("update_product") }} method="post">

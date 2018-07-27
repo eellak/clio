@@ -11,6 +11,16 @@ from models import *
 
 
 def set_boolean_value(status):
+    """Sets boolean value based on the given string.
+
+    >>> set_boolean_value('true')
+    True
+
+    :param status: Status string based on which the value has to be set.
+    :type status: str
+    :returns: bool
+
+    """
     val = None
     if status == 'true':
         val = True
@@ -20,6 +30,13 @@ def set_boolean_value(status):
 
 
 def get_number_of_entries(data):
+    """Evaluates the number of entries in the create/update Product form. The number of entries is evaluated based on the number of component fields.
+
+    :param data: Form data based on which the number of entries is evaluated.
+    :type data: werkzeug.datastructures.ImmutableMultiDict
+    :returns: int
+
+    """
     max_num = 0
     for key in data:
         if(key.startswith('component')):
@@ -30,6 +47,13 @@ def get_number_of_entries(data):
 
 
 def make_component_info(data):
+    """Format the given data to store in the database.
+
+    :param data: Form data based on which the number of entries is evaluated.
+    :type data: werkzeug.datastructures.ImmutableMultiDict
+    :returns: tuple
+
+    """
     index = 0
     component_info = list()
     max_entries = get_number_of_entries(data)
@@ -73,6 +97,11 @@ def _monkey_patch_openldap_string_flask_simpleldap_1_2_0_issue_44(ldap_instance)
 
 
 def owner_or_group_required(groups=None):
+    """When applied to a view function, any unauthenticated requests will be redirected to the login view. Authenticated requests are only permitted if they either belong to one of the listed groups or if the user is the owner.
+
+    :param groups: List of groups that should be able to access the view function.
+    :type groups: list
+    """
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
