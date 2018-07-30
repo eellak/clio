@@ -7,10 +7,10 @@
 
 import csv
 import os
-from models import *
-from app import db
+from app import app
 from datetime import datetime
 from specification import *
+from models import *
 
 
 def populate_license(directory):
@@ -121,12 +121,14 @@ def populate_product_component_conn(directory):
 
 if __name__ == '__main__':
     # Recreate DB
-    db.drop_all()
-    db.create_all()
+    with app.app_context():
+        db.init_app(app)
+        db.drop_all()
+        db.create_all()
 
-    directory = 'dataset'
-    populate_license(directory)
-    populate_component(directory)
-    populate_component_conn(directory)
-    populate_product(directory)
-    populate_product_component_conn(directory)
+        directory = 'dataset'
+        populate_license(directory)
+        populate_component(directory)
+        populate_component_conn(directory)
+        populate_product(directory)
+        populate_product_component_conn(directory)
