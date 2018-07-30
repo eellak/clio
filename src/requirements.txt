@@ -14,6 +14,7 @@ six==1.11.0
 python-dateutil==2.7.2
 alembic==0.9.9
 boolean.py==3.5
+flask-migrate==2.1.1
 license-expression==0.97
 decorator==4.3.0
 validators==0.12.1
