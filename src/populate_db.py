@@ -16,7 +16,7 @@ from models import *
 def populate_license(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'license-info.csv'))
-    with open(path) as input_file:
+    with open(path, 'r', encoding='utf-8') as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             full_name = row[0]
@@ -40,7 +40,7 @@ def populate_license(directory):
 def populate_component(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'component-info.csv'))
-    with open(path) as input_file:
+    with open(path, 'r', encoding='utf-8') as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             name = row[0]
@@ -61,7 +61,7 @@ def populate_component(directory):
 def populate_component_conn(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'component-relationship.csv'))
-    with open(path) as input_file:
+    with open(path, 'r', encoding='utf-8') as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             if(row[1] in valid_relationship):
@@ -76,7 +76,7 @@ def populate_component_conn(directory):
 def populate_product(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'product-info.csv'))
-    with open(path) as input_file:
+    with open(path, 'r', encoding='utf-8') as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             name = row[0]
@@ -96,7 +96,7 @@ def populate_product(directory):
 def populate_product_component_conn(directory):
     path = os.path.join(os.getcwd(), os.path.join(
         directory, 'product-component-relationship.csv'))
-    with open(path) as input_file:
+    with open(path, 'r', encoding='utf-8') as input_file:
         read_csv = csv.reader(input_file, delimiter=',')
         for row in read_csv:
             if(row[1] in valid_relationship):

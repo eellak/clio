@@ -11,7 +11,7 @@
     <select id="select-license" class="ui search dropdown license">
 	<option value="">Search License</option>
 	{% for license in licenses %}
-	<option value="{{ license.identifier }}">{{ license.full_name }}</option>
+	<option value="{{ license.identifier }}" data-id="{{ license.id }}">{{ license.full_name }}</option>
 	{% endfor %}
     </select>
 </div>
