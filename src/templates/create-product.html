@@ -37,7 +37,7 @@
 		<select name="license" class="ui search selection dropdown">
 		    <option value="">License</option>
 		    {% for license in licenses %}
-		    <option class="item" value="{{ license.full_name }}"> {{ license.full_name }} </option>
+		    <option class="item" value="{{ license.identifier }}"> {{ license.full_name }} </option>
 		    {% endfor %}
 		</select>
 	    </div>

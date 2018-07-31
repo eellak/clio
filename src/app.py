@@ -268,7 +268,7 @@ def create_product():
         approver = request.form['approver']
         approval_date = get_date(request.form['approval_date'])
 
-        l = License.query.filter_by(full_name=license).first()
+        l = License.query.filter_by(identifier=license).first()
         p = Product(name, version, owner, approver, approval_date)
         p.license = l
         db.session.add(p)
@@ -315,7 +315,7 @@ def update_product_info(id):
         approver = request.form['approver']
         approval_date = get_date(request.form['approval_date'])
 
-        l = License.query.filter_by(full_name=license).first()
+        l = License.query.filter_by(identifier=license).first()
         p = Product.query.filter_by(id=id).first()
         if(p):
             p.name = name
