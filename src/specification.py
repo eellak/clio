@@ -10,9 +10,12 @@ import validators
 from flask import flash
 from datetime import datetime
 import csv
+import os
+
+directory = os.path.dirname(__file__)
 
 valid_relationship = None
-with open('valid-relationship.csv') as input_file:
+with open(os.path.join(directory, 'valid-relationship.csv')) as input_file:
     read_csv = csv.reader(input_file, delimiter=',')
     relations = list()
     for row in read_csv:
@@ -20,7 +23,7 @@ with open('valid-relationship.csv') as input_file:
     valid_relationship = tuple(relations)
 
 valid_delivery = None
-with open('valid-delivery.csv') as input_file:
+with open(os.path.join(directory, 'valid-delivery.csv')) as input_file:
     read_csv = csv.reader(input_file, delimiter=',')
     delivery = list()
     for row in read_csv:

@@ -3,13 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Clio's documentation!
-================================
+Clio
+====
+
+A web based system for maintaining meta information on software components.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   access
+   coding
+   example
+   files
+   name
+   software-components
+   terms
+   source/modules
 
 
 Indices and tables
