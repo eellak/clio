@@ -47,7 +47,10 @@ def populate_component(directory):
             version = row[1]
             created_by = row[2]
             pub_date = row[3]
-            pub_date = datetime.strptime(pub_date, '%Y-%m-%d')
+            if(pub_date):
+                pub_date = datetime.strptime(pub_date, '%Y-%m-%d')
+            else:
+                pub_date = None
             origin = row[4]
             source_url = row[5]
             license_expression = row[6]
