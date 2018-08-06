@@ -8,7 +8,7 @@
 $(document).ready(function() {
     $("#a-product").addClass("active")
     var table = $("#product").DataTable( {
-	lengthChange: false,
+	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], 
 	buttons: ['copy', 'excel', 'pdf', 'print'],
     } );
     table.buttons().container()
