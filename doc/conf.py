@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.getcwd()), 's
 # -- Project information -----------------------------------------------------
 
 project = 'Clio'
-copyright = '2018, Alexios Zavras'
+copyright = '2018, Alexios Zavras, Gopalakrishnan'
 author = 'Alexios Zavras'
 
 # The short X.Y version
