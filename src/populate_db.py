@@ -34,7 +34,6 @@ def populate_license(directory):
             l = License(full_name, identifier, fsf_free_libre,
                         osi_approved, license_category, license_text)
             db.session.add(l)
-            db.session.commit()
 
 
 def populate_component(directory):
@@ -58,7 +57,6 @@ def populate_component(directory):
             c = Component(name, version, created_by, pub_date,
                           origin, source_url, license_expression, ext_link)
             db.session.add(c)
-            db.session.commit()
 
 
 def populate_component_conn(directory):
@@ -73,7 +71,6 @@ def populate_component_conn(directory):
                 input_c2_name = row[2]
                 c2 = Component.query.filter_by(name=input_c2_name).first()
                 c1.components.append(c2)
-        db.session.commit()
 
 
 def populate_product(directory):
@@ -93,7 +90,6 @@ def populate_product(directory):
             p = Product(name, version, owner, approver, approval_date)
             p.license = l
             db.session.add(p)
-            db.session.commit()
 
 
 def populate_product_component_conn(directory):
@@ -119,7 +115,6 @@ def populate_product_component_conn(directory):
                 product_component_conn = Product_Component_conn(
                     p, c, relation, modification, delivery)
                 db.session.add(product_component_conn)
-                db.session.commit()
 
 
 if __name__ == '__main__':
@@ -135,3 +130,5 @@ if __name__ == '__main__':
         populate_component_conn(directory)
         populate_product(directory)
         populate_product_component_conn(directory)
+
+        db.session.commit()
