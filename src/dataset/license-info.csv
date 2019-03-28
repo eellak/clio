@@ -1,4 +1,4 @@
-BSD Zero Clause License,0BSD,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/0BSD.html#licenseText
+BSD Zero Clause License,0BSD,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/0BSD.html#licenseText
 Attribution Assurance License,AAL,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/AAL.html#licenseText
 Abstyles License,Abstyles,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Abstyles.html#licenseText
 Adobe Systems Incorporated Source Code License Agreement,Adobe-2006,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Adobe-2006.html#licenseText
@@ -105,6 +105,8 @@ CNRI Jython License,CNRI-Jython,NON-FSF Libre,NON-OSI Approved,,Complete license
 CNRI Python Open Source GPL Compatible License Agreement,CNRI-Python-GPL-Compatible,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/CNRI-Python-GPL-Compatible.html#licenseText
 CNRI Python License,CNRI-Python,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/CNRI-Python.html#licenseText
 Condor Public License v1.1,Condor-1.1,FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Condor-1.1.html#licenseText
+copyleft-next 0.3.0,copyleft-next-0.3.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/copyleft-next-0.3.0.html#licenseText
+copyleft-next 0.3.1,copyleft-next-0.3.1,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/copyleft-next-0.3.1.html#licenseText
 Common Public Attribution License 1.0,CPAL-1.0,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/CPAL-1.0.html#licenseText
 Common Public License 1.0,CPL-1.0,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/CPL-1.0.html#licenseText
 Code Project Open License 1.02,CPOL-1.02,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/CPOL-1.02.html#licenseText
@@ -131,7 +133,7 @@ Erlang Public License v1.1,ErlPL-1.1,NON-FSF Libre,NON-OSI Approved,,Complete li
 EU DataGrid Software License,EUDatagrid,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/EUDatagrid.html#licenseText
 European Union Public License 1.0,EUPL-1.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/EUPL-1.0.html#licenseText
 European Union Public License 1.1,EUPL-1.1,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/EUPL-1.1.html#licenseText
-European Union Public License 1.2,EUPL-1.2,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/EUPL-1.2.html#licenseText
+European Union Public License 1.2,EUPL-1.2,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/EUPL-1.2.html#licenseText
 Eurosym License,Eurosym,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Eurosym.html#licenseText
 Fair License,Fair,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/Fair.html#licenseText
 Frameworx Open License 1.0,Frameworx-1.0,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/Frameworx-1.0.html#licenseText
@@ -243,6 +245,9 @@ ODC Open Database License v1.0,ODbL-1.0,FSF Libre,NON-OSI Approved,,Complete lic
 Open Data Commons Attribution License v1.0,ODC-By-1.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/ODC-By-1.0.html#licenseText
 SIL Open Font License 1.0,OFL-1.0,FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OFL-1.0.html#licenseText
 SIL Open Font License 1.1,OFL-1.1,FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/OFL-1.1.html#licenseText
+Open Government Licence v1.0,OGL-UK-1.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OGL-UK-1.0.html#licenseText
+Open Government Licence v2.0,OGL-UK-2.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OGL-UK-2.0.html#licenseText
+Open Government Licence v3.0,OGL-UK-3.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OGL-UK-3.0.html#licenseText
 Open Group Test Suite License,OGTSL,NON-FSF Libre,OSI Approved,,Complete license text is available at https://spdx.org/licenses/OGTSL.html#licenseText
 Open LDAP Public License v1.1,OLDAP-1.1,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OLDAP-1.1.html#licenseText
 Open LDAP Public License v1.2,OLDAP-1.2,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/OLDAP-1.2.html#licenseText
@@ -290,6 +295,7 @@ Ruby License,Ruby,FSF Libre,NON-OSI Approved,,Complete license text is available
 Sax Public Domain Notice,SAX-PD,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/SAX-PD.html#licenseText
 Saxpath License,Saxpath,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Saxpath.html#licenseText
 SCEA Shared Source License,SCEA,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/SCEA.html#licenseText
+Sendmail License 8.23,Sendmail-8.23,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Sendmail-8.23.html#licenseText
 Sendmail License,Sendmail,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/Sendmail.html#licenseText
 SGI Free Software License B v1.0,SGI-B-1.0,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/SGI-B-1.0.html#licenseText
 SGI Free Software License B v1.1,SGI-B-1.1,NON-FSF Libre,NON-OSI Approved,,Complete license text is available at https://spdx.org/licenses/SGI-B-1.1.html#licenseText
